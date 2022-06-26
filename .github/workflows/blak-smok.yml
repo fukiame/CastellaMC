@@ -1,9 +1,9 @@
-name: build
+name: blak smok
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '-s')"
+    if: "contains(github.event.head_commit.message, '-g')"
     steps:
     - uses: actions/checkout@v2
     - name: JDK 8
@@ -13,14 +13,15 @@ jobs:
         java-version: 8
         cache: 'maven'
     - name: patch
+      continue-on-error: true
       run: |
         git config --global user.email "you@example.com"
         git config --global user.name "Your Name"
         git submodule update --init --recursive
         ./lazinity patch
-    - name: bulid
-      run: ./lazinity jar fast
+    - name: get
+      run: tar -czf src.tar.gz Lazinity-*
     - uses: actions/upload-artifact@v2
       with:
-        name: Lazinity-JDK8
-        path: lazinity-paperclip.jar
+        name: lazinity-src
+        path: src.tar.gz
