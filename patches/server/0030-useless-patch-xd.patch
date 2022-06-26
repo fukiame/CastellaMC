@@ -236,32 +236,37 @@ index e62890433ffbe0b4e48942fe6c38b599a19e58fd..3e2952ae688da7aae1723941ed72bf5b
      }
  }
 diff --git a/src/main/resources/log4j2.xml b/src/main/resources/log4j2.xml
-index 67da1aa7a21622fb231d19dede3775a282a4a12e..b8203959447bcab959915828a5cb52fe18abba8e 100644
+index 67da1aa7a21622fb231d19dede3775a282a4a12e..23cb453f6d367dc999f71f62be559123af782e44 100644
 --- a/src/main/resources/log4j2.xml
 +++ b/src/main/resources/log4j2.xml
-@@ -6,21 +6,21 @@
+@@ -2,25 +2,25 @@
+ <Configuration status="WARN" packages="com.mojang.util" shutdownHook="disable">
+     <Appenders>
+         <Queue name="ServerGuiConsole">
+-            <PatternLayout pattern="[%d{HH:mm:ss} %level]: %msg%n" />
++            <PatternLayout pattern="%d{HH:mm:ss} %level| %msg%n" />
          </Queue>
          <TerminalConsole name="TerminalConsole">
              <PatternLayout>
 -                <LoggerNamePatternSelector defaultPattern="%highlightError{[%d{HH:mm:ss} %level]: [%logger] %paperMinecraftFormatting{%msg}%n%xEx{full}}">
-+                <LoggerNamePatternSelector defaultPattern="%highlightError{%d{HH:mm:ss} %level]: %logger] %paperMinecraftFormatting{%msg}%n%xEx{full}}">
++                <LoggerNamePatternSelector defaultPattern="%highlightError{%d{HH:mm:ss} %level| %logger| %paperMinecraftFormatting{%msg}%n%xEx{full}}">
                      <!-- Log root, Minecraft, Mojang and Bukkit loggers without prefix -->
                      <!-- Disable prefix for various plugins that bypass the plugin logger -->
                      <PatternMatch key=",net.minecraft.,Minecraft,com.mojang.,com.sk89q.,ru.tehkode.,Minecraft.AWE"
 -                                  pattern="%highlightError{[%d{HH:mm:ss} %level]: %paperMinecraftFormatting{%msg}%n%xEx{full}}" />
-+                                  pattern="%highlightError{%d{HH:mm:ss} %level]: %paperMinecraftFormatting{%msg}%n%xEx{full}}" />
++                                  pattern="%highlightError{%d{HH:mm:ss} %level| %paperMinecraftFormatting{%msg}%n%xEx{full}}" />
                  </LoggerNamePatternSelector>
              </PatternLayout>
          </TerminalConsole>
          <RollingRandomAccessFile name="File" fileName="logs/latest.log" filePattern="logs/%d{yyyy-MM-dd}-%i.log.gz">
              <PatternLayout>
 -                <LoggerNamePatternSelector defaultPattern="[%d{HH:mm:ss}] [%t/%level]: [%logger] %paperMinecraftFormatting{%msg}{strip}%n%xEx{full}">
-+                <LoggerNamePatternSelector defaultPattern="%d{HH:mm:ss}] %t/%level]: [%logger] %paperMinecraftFormatting{%msg}{strip}%n%xEx{full}">
++                <LoggerNamePatternSelector defaultPattern="%d{HH:mm:ss} %t/%level| %logger| %paperMinecraftFormatting{%msg}{strip}%n%xEx{full}">
                      <!-- Log root, Minecraft, Mojang and Bukkit loggers without prefix -->
                      <!-- Disable prefix for various plugins that bypass the plugin logger -->
                      <PatternMatch key=",net.minecraft.,Minecraft,com.mojang.,com.sk89q.,ru.tehkode.,Minecraft.AWE"
 -                                  pattern="[%d{HH:mm:ss}] [%t/%level]: %paperMinecraftFormatting{%msg}{strip}%n%xEx{full}" />
-+                                  pattern="%d{HH:mm:ss}] %t/%level]: %paperMinecraftFormatting{%msg}{strip}%n%xEx{full}" />
++                                  pattern="%d{HH:mm:ss} %t/%level| %paperMinecraftFormatting{%msg}{strip}%n%xEx{full}" />
                  </LoggerNamePatternSelector>
              </PatternLayout>
              <Policies>
