@@ -43,6 +43,7 @@ case "$1" in
     "b" | "bu" | "build")
     (
         basedir
+        mvn -N install
         cd ${FORK_NAME}-API && mvn -e clean install
         cd ../${FORK_NAME}-MojangAPI && mvn -e clean install
         cd ../${FORK_NAME}-Server && mvn -e clean install
