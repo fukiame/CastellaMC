@@ -19,7 +19,7 @@ jobs:
         git submodule update --init --recursive
         ./lazinity patch
     - name: bulid
-      run: ./lazinity jar fast quiet
+      run: ./lazinity jar fast ci
     - uses: actions/upload-artifact@v2
       with:
         name: Lazinity-JDK8
