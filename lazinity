@@ -59,7 +59,7 @@ case "$1" in
            cd "$basedir"
         fi
         if [ "$3" == "ci" ]; then
-          ADDARGS=--batch-mode
+          ADDARGS=--batch-mode --no-transfer-progress
         fi
         mvn -N $ADDARGS install
         cd ${FORK_NAME}-API && mvn -e ${ADDARGS} clean install

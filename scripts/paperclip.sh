@@ -13,7 +13,7 @@ vanillajar="$workdir/Minecraft/$mcver/$mcver.jar"
 
 (
     cd "$workdir/Paperclip"
-    mvn clean package "-Dmcver=$mcver" "-Dpaperjar=$paperjar" "-Dvanillajar=$vanillajar"
+    mvn --no-transfer-progress clean package "-Dmcver=$mcver" "-Dpaperjar=$paperjar" "-Dvanillajar=$vanillajar"
     echo "Build success!"
 )
 cp "$workdir/Paperclip/assembly/target/paperclip-${mcver}.jar" "$basedir/lazinity-paperclip.jar"

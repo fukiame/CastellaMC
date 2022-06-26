@@ -1,0 +1,66 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: astei <andrew@steinborn.me>
+Date: Tue, 30 Nov 2021 19:39:21 +0100
+Subject: [PATCH] (PaperPR) Optimize VarInts
+
+https://github.com/PaperMC/Paper/pull/6957
+
+diff --git a/src/main/java/net/minecraft/network/PacketDataSerializer.java b/src/main/java/net/minecraft/network/PacketDataSerializer.java
+index 4e2c3080b9a2296c5d3c7185496b094f2c483be7..97ba6272a981270155217082af75c61eb317ad8d 100644
+--- a/src/main/java/net/minecraft/network/PacketDataSerializer.java
++++ b/src/main/java/net/minecraft/network/PacketDataSerializer.java
+@@ -47,6 +47,15 @@ public class PacketDataSerializer extends ByteBuf {
+ 
+     private final ByteBuf a;
+     public java.util.Locale adventure$locale; // Paper
++    // Paper start - Optimize VarInts
++    private static final int[] VARINT_EXACT_BYTE_LENGTHS = new int[33];
++    static {
++        for (int i = 0; i <= 32; ++i) {
++            VARINT_EXACT_BYTE_LENGTHS[i] = (int) Math.ceil((31d - (i - 1)) / 7d);
++        }
++        VARINT_EXACT_BYTE_LENGTHS[32] = 1; // Special case for the number 0.
++    }
++    // Paper end - Optimize VarInts
+ 
+     public PacketDataSerializer(ByteBuf bytebuf) {
+         this.a = bytebuf;
+@@ -54,13 +63,7 @@ public class PacketDataSerializer extends ByteBuf {
+ 
+     public static int countBytes(int i) { return PacketDataSerializer.a(i); } // Paper - OBFHELPER
+     public static int a(int i) {
+-        for (int j = 1; j < 5; ++j) {
+-            if ((i & -1 << j * 7) == 0) {
+-                return j;
+-            }
+-        }
+-
+-        return 5;
++        return VARINT_EXACT_BYTE_LENGTHS[Integer.numberOfLeadingZeros(i)]; // Paper - Optimize VarInts
+     }
+ 
+     public <T> T a(Codec<T> codec) throws IOException {
+@@ -238,7 +241,23 @@ public class PacketDataSerializer extends ByteBuf {
+         return new UUID(this.readLong(), this.readLong());
+     }
+ 
++    // Paper start - Optimize VarInts
+     public PacketDataSerializer d(int i) {
++        // Peel the one and two byte count cases explicitly as they are the most common VarInt sizes
++        // that the proxy will write, to improve inlining.
++        if ((i & (0xFFFFFFFF << 7)) == 0) {
++            writeByte(i);
++        } else if ((i & (0xFFFFFFFF << 14)) == 0) {
++            int w = (i & 0x7F | 0x80) << 8 | (i >>> 7);
++            writeShort(w);
++        } else {
++            d_(i);
++        }
++        return this;
++    }
++
++    public PacketDataSerializer d_(int i) {
++    // Paper end - Optimize VarInts
+         while ((i & -128) != 0) {
+             this.writeByte(i & 127 | 128);
+             i >>>= 7;
