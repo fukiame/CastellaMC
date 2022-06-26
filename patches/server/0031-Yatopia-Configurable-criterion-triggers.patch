@@ -5,6 +5,9 @@ Subject: [PATCH] (Yatopia) Configurable criterion triggers
 
 This patch adds toggles for three criterion triggers that are called every tick. These can be very unnecessary, and especially in the case of CriterionTriggerEnterBlock, quite heavy.
 
+Original code by YatopiaMC, licensed under MIT
+You can find the original code on https://github.com/YatopiaMC/Yatopia
+
 // KurumiFake - they messed this patch up in their own repo...
 
 diff --git a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java b/src/main/java/me/kurumifake/lazinity/LazinityConfig.java

@@ -5,7 +5,7 @@ Subject: [PATCH] update dependencies
 
 
 diff --git a/pom.xml b/pom.xml
-index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d7bfdfc7d1bed27f00aa1780c05da490fb6d92c3 100644
+index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..91fa0a610c695a834a948a788df735b1c3ce9736 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -30,7 +30,7 @@
@@ -22,7 +22,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d7bfdfc7d1bed27f00aa1780c05da490
              <groupId>io.netty</groupId>
              <artifactId>netty-all</artifactId>
 -            <version>4.1.50.Final</version>
-+            <version>4.1.77.Final</version>
++            <version>4.1.78.Final</version>
          </dependency>
          <!-- Tuinity end - fix compile issue (cannot see new api) by moving netty include BEFORE server jar -->
          <dependency>
@@ -109,7 +109,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d7bfdfc7d1bed27f00aa1780c05da490
              <scope>test</scope>
          </dependency>
          <dependency>
-@@ -183,14 +190,14 @@
+@@ -183,15 +190,22 @@
          <dependency>
              <groupId>io.github.classgraph</groupId>
              <artifactId>classgraph</artifactId>
@@ -124,9 +124,17 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d7bfdfc7d1bed27f00aa1780c05da490
 -            <version>1.1.0-SNAPSHOT</version>
 +            <version>1.1.10-SNAPSHOT</version>
              <scope>compile</scope>
++            <!-- Lazinity - exclude netty idk -->
++            <exclusions>
++                <exclusion>
++                    <groupId>io.netty</groupId>
++                    <artifactId>netty-handler</artifactId>
++                </exclusion>
++            </exclusions>
          </dependency>
          <!-- Airplane Config -->
-@@ -234,7 +241,7 @@
+         <dependency>
+@@ -234,7 +248,7 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-jar-plugin</artifactId>
@@ -135,7 +143,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d7bfdfc7d1bed27f00aa1780c05da490
                  <configuration>
                      <forceCreation>true</forceCreation> <!-- Required to prevent shading the jar multiple times -->
                      <archive>
-@@ -278,7 +285,7 @@
+@@ -278,7 +292,7 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-shade-plugin</artifactId>
@@ -144,7 +152,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d7bfdfc7d1bed27f00aa1780c05da490
                  <executions>
                      <execution>
                          <phase>package</phase>
-@@ -289,6 +296,13 @@
+@@ -289,6 +303,13 @@
                              <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation> <!-- Paper -->
                              <createSourcesJar>${shadeSourcesJar}</createSourcesJar>
                              <filters>
@@ -158,7 +166,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d7bfdfc7d1bed27f00aa1780c05da490
                                  <filter>
                                      <artifact>io.papermc:minecraft-server</artifact>
                                      <excludes>
-@@ -388,40 +402,40 @@
+@@ -388,40 +409,40 @@
                                  <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                      <resource>META-INF/services/java.sql.Driver</resource>
                                  </transformer>
@@ -207,7 +215,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d7bfdfc7d1bed27f00aa1780c05da490
                  <configuration>
                      <workingDirectory>${basedir}/target/test-server</workingDirectory>
                      <excludes>
-@@ -450,7 +464,7 @@
+@@ -450,7 +471,7 @@
                      <plugin>
                          <groupId>org.apache.maven.plugins</groupId>
                          <artifactId>maven-checkstyle-plugin</artifactId>
@@ -216,7 +224,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d7bfdfc7d1bed27f00aa1780c05da490
                          <executions>
                              <execution>
                                  <phase>process-classes</phase>
-@@ -467,14 +481,14 @@
+@@ -467,14 +488,14 @@
                              <dependency>
                                  <groupId>com.puppycrawl.tools</groupId>
                                  <artifactId>checkstyle</artifactId>

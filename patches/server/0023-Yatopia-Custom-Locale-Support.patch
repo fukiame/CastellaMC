@@ -1,9 +1,12 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Zoe <duplexsys@protonmail.com>
 Date: Sun, 25 Oct 2020 11:45:38 -0500
-Subject: [PATCH] Custom Locale Support
+Subject: [PATCH] (Yatopia) Custom Locale Support
 
 All Server Jars Come with a pre-baked, usually English, locale file. This patch allows you to change the locale file by creating a locale.json file in the root directory of your server. Note that while custom locale files are supported by the server no support will be given for non-official Mojang locale files.
+
+Original code by YatopiaMC, licensed under MIT
+You can find the original code on https://github.com/YatopiaMC/Yatopia
 
 diff --git a/src/main/java/net/minecraft/locale/LocaleLanguage.java b/src/main/java/net/minecraft/locale/LocaleLanguage.java
 index 5218214225b50ac4059ab704086a457318e93e00..9b25594c612ec335bebb7178dd6e56861556ae6c 100644

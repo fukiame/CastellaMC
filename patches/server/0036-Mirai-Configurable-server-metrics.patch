@@ -3,6 +3,8 @@ From: Etil <81570777+etil2jz@users.noreply.github.com>
 Date: Mon, 3 Jan 2022 16:03:27 +0100
 Subject: [PATCH] (Mirai) Configurable server metrics
 
+Original code from https://github.com/etil2jz/Mirai
+Licensed under GPL-3.0
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
 index 7a86357ea75db7263598b79d31d4ae9abe5e4b50..1e2683e45d17b1f3b35cf7293f413e974eb1022f 100644

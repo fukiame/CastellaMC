@@ -3,6 +3,8 @@ From: l_MrBoom_l <admin@epserv.ru>
 Date: Sun, 8 Nov 2020 19:07:14 +0200
 Subject: [PATCH] (Yatopia) Configurable movement checks
 
+Original code by YatopiaMC, licensed under MIT
+You can find the original code on https://github.com/YatopiaMC/Yatopia
 
 diff --git a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java b/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
 index a4ab3ef6e89033fc47f3d2339b0827207fe05b22..fedac8069ec87c3e9bc7e5a0a7381e362734bb5b 100644

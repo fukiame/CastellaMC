@@ -5,6 +5,9 @@ Subject: [PATCH] (Dionysus) Use more fastutil data structures
 
 Use them in more places.
 
+Original code from https://github.com/nopjmp/Dionysus
+Licensed under MIT
+
 diff --git a/src/main/java/net/minecraft/server/network/HandshakeListener.java b/src/main/java/net/minecraft/server/network/HandshakeListener.java
 index 82540af8170f0b8cb52b13061ae8f956f1a6e46f..7996e12120752cae66c5f9e8467d6585423ab01f 100644
 --- a/src/main/java/net/minecraft/server/network/HandshakeListener.java

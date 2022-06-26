@@ -3,6 +3,7 @@ From: foss-mc <69294560+foss-mc@users.noreply.github.com>
 Date: Fri, 11 Jun 2021 12:01:35 +0000
 Subject: [PATCH] (Patina) fixup EMC
 
+Original code from https://github.com/PatinaMC/Patina
 
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/TileEntityLectern.java b/src/main/java/net/minecraft/world/level/block/entity/TileEntityLectern.java
 index f09457ce1e871df6ea49c6bc08ea5c178301fdb6..31b03823fcfc33b8b04eccd5ad1fdcef4c33968e 100644

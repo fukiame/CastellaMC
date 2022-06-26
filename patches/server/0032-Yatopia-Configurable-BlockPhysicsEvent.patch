@@ -7,6 +7,9 @@ Bukkit's BlockPhysicsEvent is *ridiculously* spammy and can easily rack in 1,600
 Paper does alleviate this quite well by only firing if plugins are listening, but a lot of common world protection plugins use this event do not offer toggles for their listeners, which makes Paper's change ineffective for most servers.
 This patch implements a hard toggle for the event.
 
+Original code by YatopiaMC, licensed under MIT
+You can find the original code on https://github.com/YatopiaMC/Yatopia
+
 diff --git a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java b/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
 index da88e1a488f8ecbe76170fa635b07b011d54be36..a4ab3ef6e89033fc47f3d2339b0827207fe05b22 100644
 --- a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java

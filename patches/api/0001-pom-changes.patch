@@ -7,7 +7,7 @@ Subject: [PATCH] pom changes
 - update dependencies
 
 diff --git a/pom.xml b/pom.xml
-index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..82e70715ea442eb198654ea0cd89df1dde76e292 100644
+index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..c84dd4f1c9c202caa4cf9f9aea9e8246e1245169 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -3,18 +3,18 @@
@@ -39,7 +39,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..82e70715ea442eb198654ea0cd89df1d
          <maven.compiler.target>1.8</maven.compiler.target>
          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 -        <adventure.version>4.7.0</adventure.version> <!-- Paper - When updating this make sure to update the linked JavaDocs on the homepage as well! -->
-+        <adventure.version>4.10.1</adventure.version> <!-- Paper - When updating this make sure to update the linked JavaDocs on the homepage as well! -->
++        <adventure.version>4.11.0</adventure.version> <!-- Paper - When updating this make sure to update the linked JavaDocs on the homepage as well! -->
      </properties>
  
      <repositories>
@@ -72,7 +72,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..82e70715ea442eb198654ea0cd89df1d
              <groupId>net.md-5</groupId>
              <artifactId>bungeecord-chat</artifactId>
 -            <version>1.16-R0.4</version>
-+            <version>1.17-R0.1-SNAPSHOT</version>
++            <version>1.19-R0.1-SNAPSHOT</version>
              <type>jar</type>
              <scope>compile</scope>
          </dependency>
@@ -191,7 +191,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..82e70715ea442eb198654ea0cd89df1d
                  <executions>
                      <execution>
                          <phase>package</phase>
-@@ -273,12 +273,12 @@
+@@ -273,13 +273,13 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-javadoc-plugin</artifactId>
@@ -202,12 +202,14 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..82e70715ea442eb198654ea0cd89df1d
 -                        <link>https://guava.dev/releases/21.0/api/docs/</link>
 -                        <link>https://javadoc.io/doc/org.yaml/snakeyaml/1.27/</link>
 -                        <link>https://javadoc.io/doc/org.jetbrains/annotations-java5/20.1.0/</link>
+-                        <link>https://javadoc.io/doc/net.md-5/bungeecord-chat/1.16-R0.4/</link>
 +                        <link>https://javadoc.io/doc/com.google.guava/guava/31.1-jre/</link>
 +                        <link>https://javadoc.io/doc/org.yaml/snakeyaml/1.30/</link>
 +                        <link>https://javadoc.io/doc/org.jetbrains/annotations-java5/23.0.0/</link>
-                         <link>https://javadoc.io/doc/net.md-5/bungeecord-chat/1.16-R0.4/</link>
++                        <link>https://javadoc.io/doc/net.md-5/bungeecord-chat/1.19-R0.1/</link>
                          <!-- Paper start -->
                          <link>https://jd.adventure.kyori.net/api/${adventure.version}/</link>
+                         <link>https://jd.adventure.kyori.net/text-serializer-gson/${adventure.version}/</link>
 @@ -303,7 +303,7 @@
                      <plugin>
                          <groupId>org.apache.maven.plugins</groupId>

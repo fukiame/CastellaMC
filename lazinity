@@ -43,7 +43,6 @@ case "$1" in
     "b" | "bu" | "build")
     (
         basedir
-        mvn -N install
         cd ${FORK_NAME}-API && mvn -e clean install
         cd ../${FORK_NAME}-MojangAPI && mvn -e clean install
         cd ../${FORK_NAME}-Server && mvn -e clean install
@@ -58,10 +57,13 @@ case "$1" in
            ./scripts/apply.sh "$basedir"
            cd "$basedir"
         fi
-        mvn -N install
-        cd ${FORK_NAME}-API && mvn -e clean install
-        cd ../${FORK_NAME}-MojangAPI && mvn -e clean install
-        cd ../${FORK_NAME}-Server && mvn -e clean install
+        if [ "$3" == "quiet" ]; then
+          ADDARGS=--no-transfer-progress
+        fi
+        mvn -N $ADDARGS install
+        cd ${FORK_NAME}-API && mvn -e $ADDARGS clean install
+        cd ../${FORK_NAME}-MojangAPI && mvn -e $ADDARGS clean install
+        cd ../${FORK_NAME}-Server && mvn -e $ADDARGS clean install
         cd "$basedir"
         ./scripts/paperclip.sh
     )
