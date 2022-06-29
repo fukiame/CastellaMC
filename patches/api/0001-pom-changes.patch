@@ -7,7 +7,7 @@ Subject: [PATCH] pom changes
 - update dependencies
 
 diff --git a/pom.xml b/pom.xml
-index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..c84dd4f1c9c202caa4cf9f9aea9e8246e1245169 100644
+index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389cbd6b2293 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -3,18 +3,18 @@
@@ -88,21 +88,21 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..c84dd4f1c9c202caa4cf9f9aea9e8246
              <groupId>org.apache.maven</groupId>
              <artifactId>maven-resolver-provider</artifactId>
 -            <version>3.8.1</version>
-+            <version>3.8.5</version>
++            <version>3.8.6</version>
              <scope>provided</scope>
          </dependency>
          <dependency>
              <groupId>org.apache.maven.resolver</groupId>
              <artifactId>maven-resolver-connector-basic</artifactId>
 -            <version>1.6.2</version>
-+            <version>1.8.0</version>
++            <version>1.8.1</version>
              <scope>provided</scope>
          </dependency>
          <dependency>
              <groupId>org.apache.maven.resolver</groupId>
              <artifactId>maven-resolver-transport-http</artifactId>
 -            <version>1.6.2</version>
-+            <version>1.8.0</version>
++            <version>1.8.1</version>
              <scope>provided</scope>
          </dependency>
          <!-- annotations -->
@@ -170,7 +170,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..c84dd4f1c9c202caa4cf9f9aea9e8246
                          <groupId>org.eclipse.jdt</groupId>
                          <artifactId>ecj</artifactId>
 -                        <version>3.24.0</version>
-+                        <version>3.29.0</version>
++                        <version>3.30.0</version>
                      </dependency>
                  </dependencies>
              </plugin>
