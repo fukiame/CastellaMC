@@ -47,10 +47,10 @@ index 89c89e633f14b5820147e734b1b7ad8cadfdce80..a940c8590e1612473948d6d4dc3a5746
  
              Command.broadcastCommandMessage(sender, prefix + "Airplane configuration has been reloaded.");
 diff --git a/src/main/java/gg/airplane/AirplaneConfig.java b/src/main/java/gg/airplane/AirplaneConfig.java
-index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..21c1b16221d34b2414e281d8aa14c9c4cd3404a1 100644
+index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..8f3618fa7855e1d864ec4375e97e107d86b175a1 100644
 --- a/src/main/java/gg/airplane/AirplaneConfig.java
 +++ b/src/main/java/gg/airplane/AirplaneConfig.java
-@@ -1,107 +1,113 @@
+@@ -1,107 +1,107 @@
 -package gg.airplane;
 -
 -import co.technove.air.AIR;
@@ -172,17 +172,14 @@ index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..21c1b16221d34b2414e281d8aa14c9c4
 +
 +public final class AirplaneConfig {
 +
-+    public static final int CURRENT_CONFIG_VERSION = 0;
-+
 +    private static final Object[] EMPTY = new Object[0];
 +
 +    private static File configFile;
 +    private static YamlConfiguration config;
-+    private static int configVersion;
 +
 +    public static void init(final File file) {
 +        AirplaneConfig.configFile = file;
-+        AirplaneConfig.config = new YamlConfiguration();l
++        AirplaneConfig.config = new YamlConfiguration();
 +        config.options().copyDefaults(true);
 +
 +        if (!file.exists()) {
@@ -205,8 +202,6 @@ index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..21c1b16221d34b2414e281d8aa14c9c4
 +    }
 +
 +    public static void load(Class<?> clazz, Object instance) {
-+        AirplaneConfig.configVersion = AirplaneConfig.getInt("config-version-please-do-not-modify-me", CURRENT_CONFIG_VERSION);
-+
 +        for (final Method method : clazz.getDeclaredMethods()) {
 +            if (method.getReturnType() != void.class || method.getParameterCount() != 0 ||
 +                    !Modifier.isPrivate(method.getModifiers()) || (instance == null && !Modifier.isStatic(method.getModifiers()))) {
@@ -221,7 +216,6 @@ index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..21c1b16221d34b2414e281d8aa14c9c4
 +            }
 +        }
 +
-+        /* We re-save to add new options */
 +        try {
 +            config.save(AirplaneConfig.configFile);
 +        } catch (final Exception ex) {
