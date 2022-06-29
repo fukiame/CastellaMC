@@ -5,7 +5,7 @@ Subject: [PATCH] update dependencies
 
 
 diff --git a/pom.xml b/pom.xml
-index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..91fa0a610c695a834a948a788df735b1c3ce9736 100644
+index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d6d4ab9c4c1d5749280d41e1d549d34593d1ab18 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -30,7 +30,7 @@
@@ -82,21 +82,21 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..91fa0a610c695a834a948a788df735b1
              <groupId>org.apache.maven</groupId>
              <artifactId>maven-resolver-provider</artifactId>
 -            <version>3.8.1</version>
-+            <version>3.8.5</version>
++            <version>3.8.6</version>
              <scope>runtime</scope>
          </dependency>
          <dependency>
              <groupId>org.apache.maven.resolver</groupId>
              <artifactId>maven-resolver-connector-basic</artifactId>
 -            <version>1.6.2</version>
-+            <version>1.8.0</version>
++            <version>1.8.1</version>
              <scope>runtime</scope>
          </dependency>
          <dependency>
              <groupId>org.apache.maven.resolver</groupId>
              <artifactId>maven-resolver-transport-http</artifactId>
 -            <version>1.6.2</version>
-+            <version>1.8.0</version>
++            <version>1.8.1</version>
              <scope>runtime</scope>
          </dependency>
          <dependency>
@@ -114,7 +114,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..91fa0a610c695a834a948a788df735b1
              <groupId>io.github.classgraph</groupId>
              <artifactId>classgraph</artifactId>
 -            <version>4.8.47</version>
-+            <version>4.8.146</version>
++            <version>4.8.147</version>
              <scope>test</scope>
          </dependency>
          <!-- for optimized protocol handling -->
@@ -122,7 +122,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..91fa0a610c695a834a948a788df735b1
              <groupId>com.velocitypowered</groupId>
              <artifactId>velocity-native</artifactId>
 -            <version>1.1.0-SNAPSHOT</version>
-+            <version>1.1.10-SNAPSHOT</version>
++            <version>3.1.2-SNAPSHOT</version>
              <scope>compile</scope>
 +            <!-- Lazinity - exclude netty idk -->
 +            <exclusions>
@@ -203,7 +203,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..91fa0a610c695a834a948a788df735b1
                          <groupId>org.eclipse.jdt</groupId>
                          <artifactId>ecj</artifactId>
 -                        <version>3.24.0</version>
-+                        <version>3.29.0</version>
++                        <version>3.30.0</version>
                      </dependency>
                  </dependencies>
              </plugin>

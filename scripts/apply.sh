@@ -27,7 +27,7 @@ PS1="$"
 
 airplaneVer=$(cat current-airplane)
 gpgsign="$(git config commit.gpgsign || echo "false")"
-echo "Rebuilding Forked projects.... "
+echo "Rebuilding forked projects.... "
 function applyPatch {
     what=$1
     what_name=$(basename $what)
@@ -65,8 +65,8 @@ function applyPatch {
     git am --3way --ignore-whitespace "$basedir/patches/$patch_folder/"*.patch
     if [ "$?" != "0" ]; then
         echo "  Something did not apply cleanly to $target."
-        echo "  Please review above details and finish the apply then"
-        echo "  save the changes with rebuildPatches.sh"
+        echo "  Please review above details, finish the apply then"
+        echo "  save the changes with rebuildpatches.sh"
         exit 1
     else
         echo "  Patches applied cleanly to $target"

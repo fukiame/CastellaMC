@@ -68,7 +68,7 @@ function importLibrary {
 (
     cd Airplane/Airplane-Server/
     lastlog=$(git log -1 --oneline)
-    if [[ "$lastlog" = *"Lazinity-Extra mc-dev Imports"* ]]; then
+    if [[ "$lastlog" = *"Lazinity - extra mc-dev imports"* ]]; then
         git reset --hard HEAD^
     fi
 )
@@ -102,7 +102,7 @@ fi
 ###############################################################################################
 ###############################################################################################
 
-import world/item/ItemWrittenBook
+#import world/item/ItemWrittenBook
 ########################################################
 ########################################################
 ########################################################
@@ -121,6 +121,6 @@ importLibrary com.mojang brigadier  com/mojang/brigadier/arguments BoolArgumentT
     cd Airplane/Airplane-Server/
     rm -rf nms-patches
     git add src -A
-    echo -e "Lazinity-Extra mc-dev Imports\n\n$MODLOG" | git commit src -F -
+    echo -e "Lazinity - extra mc-dev imports\n\n$MODLOG" | git commit src -F -
     exit 0
 )
