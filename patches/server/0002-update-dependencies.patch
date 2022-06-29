@@ -5,7 +5,7 @@ Subject: [PATCH] update dependencies
 
 
 diff --git a/pom.xml b/pom.xml
-index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d6d4ab9c4c1d5749280d41e1d549d34593d1ab18 100644
+index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..9e9929d7aa33dc125a8ee760aee12f90747e346d 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -30,7 +30,7 @@
@@ -122,7 +122,7 @@ index cf30fcf0130edc9a6126ccd5f62dc0b107a6650c..d6d4ab9c4c1d5749280d41e1d549d345
              <groupId>com.velocitypowered</groupId>
              <artifactId>velocity-native</artifactId>
 -            <version>1.1.0-SNAPSHOT</version>
-+            <version>3.1.2-SNAPSHOT</version>
++            <version>1.1.10-SNAPSHOT</version>
              <scope>compile</scope>
 +            <!-- Lazinity - exclude netty idk -->
 +            <exclusions>
