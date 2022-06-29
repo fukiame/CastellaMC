@@ -12,11 +12,11 @@ SOURCE=$([[ "$SOURCE" = /* ]] && echo "$SOURCE" || echo "$PWD/${SOURCE#./}")
 basedir=$(dirname "$SOURCE")
 . "$basedir"/scripts/init.sh
 
-paperstash() {
+lstash() {
     STASHED=$(git stash)
 }
 
-paperunstash() {
+lunstash() {
     if [[ "$STASHED" != "No local changes to save" ]] ; then
         git stash pop
     fi
@@ -84,16 +84,16 @@ case "$1" in
     ;;
     *)
         echo "Lazinity build tool command."
-        echo "This provides a variety of commands to build and manage the PaperMC build environment."
         echo ""
         echo " Commands:"
-        echo "  * rb, rebuild  | Rebuild patches."
-        echo "  * p, patch     | Apply all patches to top of Paper without building it."
-        echo "  * up, upstream | Build Paper upstream, pass arg up to update paper."
-        echo "  * b, build     | Build API and Server but no deploy."
-        echo "  * d, deploy    | Build and Deploy API jar and build Server."
+        echo "  * rb, rebuild    | Rebuild patches."
+        echo "  * p, patch       | Apply all patches to top of Airplane without building."
+        echo "  * jar, paperclip | Build a paperclip jar for normal usage."
+        echo "  * up, upstream   | Build upstream, pass arg up to update upstream."
+        echo "  * b, build       | Build API and Server without deploying."
+        echo "  * d, deploy      | Build and Deploy API jar and build Server."
     ;;
 esac
 
-unset -f paperstash
-unset -f paperunstash
+unset -f lstash
+unset -f lunstash
