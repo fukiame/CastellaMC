@@ -416,7 +416,7 @@ index 15b972b4a93b8fe3655acec47bc84b0f2c4620a6..48ad0291a74b28725d3c786cd6370ce1
                  if (optionset.has("port")) {
                      int port = (Integer) optionset.valueOf("port");
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 6c93f2d6ab6755898f7fe828bbc863dd1efa7194..f481102022d9051ab3e0f85aef94c7efc7ad625f 100644
+index 6c93f2d6ab6755898f7fe828bbc863dd1efa7194..d6b93130510e87ce2190e23da31e514e1c17dcd3 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -32,7 +32,6 @@ import net.minecraft.server.DataPackResources;
@@ -436,7 +436,18 @@ index 6c93f2d6ab6755898f7fe828bbc863dd1efa7194..f481102022d9051ab3e0f85aef94c7ef
      private final TextFilter r;
  
      // CraftBukkit start - Signature changed
-@@ -518,18 +515,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
+@@ -419,10 +416,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
+             this.r.close();
+         }
+ 
+-        if (this.q != null) {
+-            //this.q.b(); // Tuinity - do not wait for AWT, causes deadlock with sigint handler (AWT shutdown will properly clear our resources anyways)
+-        }
+-
+         if (this.remoteControlListener != null) {
+             //this.remoteControlListener.b(); // Paper - don't wait for remote connections
+         }
+@@ -518,18 +511,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
          return this.getMotd();
      }
  
