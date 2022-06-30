@@ -47,7 +47,7 @@ index 89c89e633f14b5820147e734b1b7ad8cadfdce80..a940c8590e1612473948d6d4dc3a5746
  
              Command.broadcastCommandMessage(sender, prefix + "Airplane configuration has been reloaded.");
 diff --git a/src/main/java/gg/airplane/AirplaneConfig.java b/src/main/java/gg/airplane/AirplaneConfig.java
-index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..8f3618fa7855e1d864ec4375e97e107d86b175a1 100644
+index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..38b93ec756f169e439d109aba095aa506c9fba33 100644
 --- a/src/main/java/gg/airplane/AirplaneConfig.java
 +++ b/src/main/java/gg/airplane/AirplaneConfig.java
 @@ -1,107 +1,107 @@
@@ -255,14 +255,14 @@ index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..8f3618fa7855e1d864ec4375e97e107d
 +
 +    public static byte entityDespawnCheckFrequency;
 +    private static void entitySettings() {
-+        entityDespawnCheckFrequency = (byte) Math.max(config.getInt("entities.despawn-check-freq", 8), Byte.MAX_VALUE);
++        entityDespawnCheckFrequency = (byte) Math.max(getInt("entities.despawn-check-freq", 8), Byte.MAX_VALUE);
 +    }
 +
 +    public static boolean disableMethodProfiler;
 +    public static boolean simplerItemCollision;
 +    private static void miscSettings() {
-+        disableMethodProfiler = config.getBoolean("misc.disable-method-profiler", true);
-+        simplerItemCollision = config.getBoolean("misc.simpler-item-collision", false);
++        disableMethodProfiler = getBoolean("misc.disable-method-profiler", true);
++        simplerItemCollision = getBoolean("misc.simpler-item-collision", false);
 +    }
 +}
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
