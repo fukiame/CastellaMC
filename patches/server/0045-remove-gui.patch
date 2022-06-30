@@ -800,21 +800,27 @@ index 928586046c0fa2f508b12e885f109ddecb3c035f..5719b70de88d312ef645d0a4719fda06
                  acceptsAll(asList("nojline"), "Disables jline and emulates the vanilla console");
  
 diff --git a/src/main/resources/log4j2.xml b/src/main/resources/log4j2.xml
-index 23cb453f6d367dc999f71f62be559123af782e44..cc19a5dda86427513e053e51436c0f147f5c2830 100644
+index 23cb453f6d367dc999f71f62be559123af782e44..cfd15225c0b2112c482ea9ef822e4b86f2d1f88e 100644
 --- a/src/main/resources/log4j2.xml
 +++ b/src/main/resources/log4j2.xml
-@@ -1,9 +1,9 @@
+@@ -1,9 +1,6 @@
  <?xml version="1.0" encoding="UTF-8"?>
  <Configuration status="WARN" packages="com.mojang.util" shutdownHook="disable">
      <Appenders>
 -        <Queue name="ServerGuiConsole">
-+        <!--<Queue name="ServerGuiConsole">
-             <PatternLayout pattern="%d{HH:mm:ss} %level| %msg%n" />
+-            <PatternLayout pattern="%d{HH:mm:ss} %level| %msg%n" />
 -        </Queue>
-+        </Queue>--> <!-- Lazinity - whats gui? is it edible? -->
          <TerminalConsole name="TerminalConsole">
              <PatternLayout>
                  <LoggerNamePatternSelector defaultPattern="%highlightError{%d{HH:mm:ss} %level| %logger| %paperMinecraftFormatting{%msg}%n%xEx{full}}">
+@@ -37,7 +34,6 @@
+             </filters>
+             <AppenderRef ref="File"/>
+             <AppenderRef ref="TerminalConsole" level="info"/>
+-            <AppenderRef ref="ServerGuiConsole" level="info"/>
+         </Root>
+     </Loggers>
+ </Configuration>
 diff --git a/src/main/resources/logo.png b/src/main/resources/logo.png
 deleted file mode 100644
 index 1e6ee83b1a207eca59d82b25c06895ce894e8173..0000000000000000000000000000000000000000
