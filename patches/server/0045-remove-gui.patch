@@ -398,8 +398,25 @@ index c3e54da4ab6440811aab2f9dd1e218802ac13285..00000000000000000000000000000000
 -        timer.stop();
 -    }
 -}
+diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
+index 15b972b4a93b8fe3655acec47bc84b0f2c4620a6..48ad0291a74b28725d3c786cd6370ce119e5b51d 100644
+--- a/src/main/java/net/minecraft/server/Main.java
++++ b/src/main/java/net/minecraft/server/Main.java
+@@ -232,12 +232,6 @@ public class Main {
+                 dedicatedserver1.c(optionset.has(optionspec2));
+                 dedicatedserver1.b((String) optionset.valueOf(optionspec12));
+                 */
+-                boolean flag1 = !optionset.has("nogui") && !optionset.nonOptionArguments().contains("nogui");
+-
+-                if(!Boolean.parseBoolean(System.getenv().getOrDefault("PAPER_DISABLE_SERVER_GUI", String.valueOf(false)))) // Paper
+-                if (flag1 && !GraphicsEnvironment.isHeadless()) {
+-                    dedicatedserver1.bd();
+-                }
+ 
+                 if (optionset.has("port")) {
+                     int port = (Integer) optionset.valueOf("port");
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 6c93f2d6ab6755898f7fe828bbc863dd1efa7194..83a5a5bf7821a5dc2a2ac3fe7ef0f0cd7718b0a4 100644
+index 6c93f2d6ab6755898f7fe828bbc863dd1efa7194..f481102022d9051ab3e0f85aef94c7efc7ad625f 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -32,7 +32,6 @@ import net.minecraft.server.DataPackResources;
@@ -410,32 +427,34 @@ index 6c93f2d6ab6755898f7fe828bbc863dd1efa7194..83a5a5bf7821a5dc2a2ac3fe7ef0f0cd
  import net.minecraft.server.level.EntityPlayer;
  import net.minecraft.server.level.WorldServer;
  import net.minecraft.server.level.progress.WorldLoadListenerFactory;
-@@ -80,8 +79,8 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
-     public final RemoteControlCommandListener remoteControlCommandListener;
+@@ -81,8 +80,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
      private RemoteControlListener remoteControlListener;
      public DedicatedServerSettings propertyManager;
--    @Nullable
--    private ServerGUI q;
-+    /*@Nullable // Lazinity
-+    private ServerGUI q;*/ // Lazinity
      @Nullable
+-    private ServerGUI q;
+-    @Nullable
      private final TextFilter r;
  
-@@ -518,12 +517,12 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
+     // CraftBukkit start - Signature changed
+@@ -518,18 +515,6 @@ public class DedicatedServer extends MinecraftServer implements IMinecraftServer
          return this.getMotd();
      }
  
 -    public void bd() {
-+    /*public void bd() { // Lazinity
-         if (this.q == null) {
-             this.q = ServerGUI.a(this);
-         }
- 
+-        if (this.q == null) {
+-            this.q = ServerGUI.a(this);
+-        }
+-
 -    }
-+    }*/ // Lazinity
- 
+-
+-    @Override
+-    public boolean ah() {
+-        return this.q != null;
+-    }
+-
      @Override
-     public boolean ah() {
+     public boolean a(EnumGamemode enumgamemode, boolean flag, int i) {
+         return false;
 diff --git a/src/main/java/net/minecraft/server/gui/GuiStatsComponent.java b/src/main/java/net/minecraft/server/gui/GuiStatsComponent.java
 deleted file mode 100644
 index 79cc587d8ad9f576f9e4478a41baabcaf690c568..0000000000000000000000000000000000000000
