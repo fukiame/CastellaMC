@@ -5,10 +5,10 @@ Subject: [PATCH] (Sustopia) Remove Flare
 
 
 diff --git a/pom.xml b/pom.xml
-index 9e9929d7aa33dc125a8ee760aee12f90747e346d..7c896e6ffc4123cc7e73ddc15368ad954c17c14c 100644
+index 90229e0ab0bb8b7ecf76a873d34b167d91c70d3b..2290fc378433c9c6c6b086b3d66ab35518bd6bfd 100644
 --- a/pom.xml
 +++ b/pom.xml
-@@ -214,13 +214,6 @@
+@@ -230,13 +230,6 @@
              <version>fe3dbb4420</version>
              <scope>compile</scope>
          </dependency>

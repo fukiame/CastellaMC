@@ -6,10 +6,10 @@ Subject: [PATCH] move Airplane config to yaml
 theres nothing bad with AIR nessecarily saying, its just kinda annoying having multiple file formats to deal with
 
 diff --git a/pom.xml b/pom.xml
-index 7c896e6ffc4123cc7e73ddc15368ad954c17c14c..0f76d7a0eb191f0d404c404f02b9b7f436f20845 100644
+index 2290fc378433c9c6c6b086b3d66ab35518bd6bfd..3903690a305cbd2b91e13c37cee8cdcf0db5c2e3 100644
 --- a/pom.xml
 +++ b/pom.xml
-@@ -207,13 +207,6 @@
+@@ -223,13 +223,6 @@
                  </exclusion>
              </exclusions>
          </dependency>
@@ -47,76 +47,131 @@ index 89c89e633f14b5820147e734b1b7ad8cadfdce80..a940c8590e1612473948d6d4dc3a5746
  
              Command.broadcastCommandMessage(sender, prefix + "Airplane configuration has been reloaded.");
 diff --git a/src/main/java/gg/airplane/AirplaneConfig.java b/src/main/java/gg/airplane/AirplaneConfig.java
-index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..38b93ec756f169e439d109aba095aa506c9fba33 100644
+index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..bc3686ec7a612118463f3c814ba027036a6f2286 100644
 --- a/src/main/java/gg/airplane/AirplaneConfig.java
 +++ b/src/main/java/gg/airplane/AirplaneConfig.java
-@@ -1,107 +1,107 @@
--package gg.airplane;
--
+@@ -1,52 +1,79 @@
+ package gg.airplane;
+ 
 -import co.technove.air.AIR;
--import net.minecraft.server.MinecraftServer;
++import org.bukkit.Bukkit;
++import org.bukkit.configuration.file.YamlConfiguration;
++
+ import net.minecraft.server.MinecraftServer;
 -import org.apache.logging.log4j.Level;
--
--import java.io.File;
+ 
+ import java.io.File;
 -import java.io.FileInputStream;
 -import java.io.FileOutputStream;
 -import java.io.IOException;
--import java.lang.reflect.Method;
--import java.lang.reflect.Modifier;
--
+ import java.lang.reflect.Method;
+ import java.lang.reflect.Modifier;
++import java.util.logging.Level;
++
++public final class AirplaneConfig {
++
++    private static final Object[] EMPTY = new Object[0];
+ 
 -public class AirplaneConfig {
--
++    private static File configFile;
++    private static YamlConfiguration config;
+ 
 -    private static AIR config;
--
++    public static void init(final File file) {
++        AirplaneConfig.configFile = file;
++        AirplaneConfig.config = new YamlConfiguration();
++        config.options().copyDefaults(true);
+ 
 -    public static void load() throws IOException {
 -        File configFile = new File("airplane.air");
 -        if (configFile.exists()) {
 -            try (FileInputStream inputStream = new FileInputStream(configFile)) {
 -                config = new AIR(inputStream);
--            }
--        } else {
++        if (!file.exists()) {
++            try {
++                file.createNewFile();
++            } catch (final Exception ex) {
++                System.out.println("Failure to create Airplane config");
++                ex.printStackTrace();
+             }
+         } else {
 -            config = new AIR();
--        }
--
++            try {
++                config.load(file);
++            } catch (final Exception ex) {
++                System.out.println("Failure to load Airplane config");
++                throw new RuntimeException(ex);
++            }
+         }
+ 
 -        config.setComment("info",
 -          "Airplane Configuration",
 -          "Read https://blog.airplane.gg/ to find out more about Airplane",
 -          "Join our Discord to receive support & optimization help: https://discord.gg/3gtc45q");
 -        config.getString("info.version", "1.0");
--
++        AirplaneConfig.load(AirplaneConfig.class, null);
++    }
+ 
 -        for (Method method : AirplaneConfig.class.getDeclaredMethods()) {
 -            if (Modifier.isStatic(method.getModifiers()) && Modifier.isPrivate(method.getModifiers())) {
--                method.setAccessible(true);
++    public static void load(Class<?> clazz, Object instance) {
++        for (final Method method : clazz.getDeclaredMethods()) {
++            if (method.getReturnType() != void.class || method.getParameterCount() != 0 ||
++                    !Modifier.isPrivate(method.getModifiers()) || (instance == null && !Modifier.isStatic(method.getModifiers()))) {
++                continue;
++            }
++
++            try {
+                 method.setAccessible(true);
 -                try {
 -                    method.invoke(null);
 -                } catch (Throwable t) {
 -                    MinecraftServer.LOGGER.log(Level.WARN, "Failed to load configuration option from " + method.getName(), t);
 -                }
--            }
--        }
--
++                method.invoke(instance, EMPTY);
++            } catch (final Exception ex) {
++                throw new RuntimeException(ex);
+             }
+         }
+ 
 -        try (FileOutputStream outputStream = new FileOutputStream(configFile)) {
 -            config.save(outputStream);
--        }
--    }
++        try {
++            config.save(AirplaneConfig.configFile);
++        } catch (final Exception ex) {
++            System.out.println("Unable to save Airplane config");
++            ex.printStackTrace();
+         }
+     }
+ 
++    private static boolean getBoolean(final String path, final boolean dfl) {
++        AirplaneConfig.config.addDefault(path, Boolean.valueOf(dfl));
++        return AirplaneConfig.config.getBoolean(path, dfl);
++    }
++
++    private static int getInt(final String path, final int dfl) {
++        AirplaneConfig.config.addDefault(path, Integer.valueOf(dfl));
++        return AirplaneConfig.config.getInt(path, dfl);
++    }
++
+     public static boolean dearEnabled;
+     public static int startDistance;
+     public static int startDistanceSquared;
+@@ -55,53 +82,26 @@ public class AirplaneConfig {
+     public static boolean dynamicVillagerBehavior;
+     public static boolean dynamicPiglinBehavior;
+     public static boolean dynamicHoglinBehavior;
 -
--    public static boolean dearEnabled;
--    public static int startDistance;
--    public static int startDistanceSquared;
--    public static int maximumActivationPrio;
--    public static int activationDistanceMod;
--    public static boolean dynamicVillagerBehavior;
--    public static boolean dynamicPiglinBehavior;
--    public static boolean dynamicHoglinBehavior;
--
--    private static void dynamicActivationRange() {
+     private static void dynamicActivationRange() {
 -        config.setComment("activation-range", "Optimizes how entities act when", "they're far away from the player");
 -
 -        dearEnabled = config.getBoolean("activation-range.enabled", true);
 -        startDistance = config.getInt("activation-range.start-distance", 12,
 -          "This value determines how far away an entity has to be",
 -          "from the player to start being effected by DEAR.");
--        startDistanceSquared = startDistance * startDistance;
++        dearEnabled = getBoolean("activation-range.enabled", true);
++        startDistance = getInt("activation-range.start-distance", 12);
+         startDistanceSquared = startDistance * startDistance;
 -        maximumActivationPrio = config.getInt("activation-range.max-tick-freq", 20,
 -          "This value defines how often in ticks, the furthest entity",
 -          "will get their pathfinders and behaviors ticked. 20 = 1s");
@@ -131,22 +186,28 @@ index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..38b93ec756f169e439d109aba095aa50
 -        dynamicVillagerBehavior = config.getBoolean("behavior-activation.villager", true);
 -        dynamicPiglinBehavior = config.getBoolean("behavior-activation.piglin", true);
 -        dynamicHoglinBehavior = config.getBoolean("behavior-activation.hoglin", true);
--    }
++        maximumActivationPrio = getInt("activation-range.max-tick-freq", 20);
++        activationDistanceMod = getInt("activation-range.activation-dist-mod", 8);
++        dynamicVillagerBehavior = getBoolean("behavior-activation.villager", true);
++        dynamicPiglinBehavior = getBoolean("behavior-activation.piglin", true);
++        dynamicHoglinBehavior = getBoolean("behavior-activation.hoglin", true);
+     }
+ 
 -
+     public static byte entityDespawnCheckFrequency;
 -
--    public static byte entityDespawnCheckFrequency;
--
--    private static void entitySettings() {
+     private static void entitySettings() {
 -        config.setComment("entities", "Configures settings for generic entities");
 -
 -        entityDespawnCheckFrequency = (byte) Math.max(config.getInt("entities.despawn-check-freq", 8), Byte.MAX_VALUE);
--    }
++        entityDespawnCheckFrequency = (byte) Math.max(getInt("entities.despawn-check-freq", 8), Byte.MAX_VALUE);
+     }
+ 
 -
+     public static boolean disableMethodProfiler;
+     public static boolean simplerItemCollision;
 -
--    public static boolean disableMethodProfiler;
--    public static boolean simplerItemCollision;
--
--    private static void miscSettings() {
+     private static void miscSettings() {
 -        config.setComment("misc", "Settings for things that don't belong elsewhere");
 -
 -        disableMethodProfiler = config.getBoolean("misc.disable-method-profiler", true);
@@ -154,117 +215,12 @@ index 3a8a494d2f4f5a2d1f35328be082e2c4379e1474..38b93ec756f169e439d109aba095aa50
 -          "When an item is inside a block, it gets pushed up.",
 -          "This option when true makes the check simpler,",
 -          "ignoring entities and complex collisions like pistons.");
--    }
--
--
--}
-+package gg.airplane;
-+
-+import org.bukkit.Bukkit;
-+import org.bukkit.configuration.file.YamlConfiguration;
-+
-+import net.minecraft.server.MinecraftServer;
-+
-+import java.io.File;
-+import java.lang.reflect.Method;
-+import java.lang.reflect.Modifier;
-+import java.util.logging.Level;
-+
-+public final class AirplaneConfig {
-+
-+    private static final Object[] EMPTY = new Object[0];
-+
-+    private static File configFile;
-+    private static YamlConfiguration config;
-+
-+    public static void init(final File file) {
-+        AirplaneConfig.configFile = file;
-+        AirplaneConfig.config = new YamlConfiguration();
-+        config.options().copyDefaults(true);
-+
-+        if (!file.exists()) {
-+            try {
-+                file.createNewFile();
-+            } catch (final Exception ex) {
-+                System.out.println("Failure to create Airplane config");
-+                ex.printStackTrace();
-+            }
-+        } else {
-+            try {
-+                config.load(file);
-+            } catch (final Exception ex) {
-+                System.out.println("Failure to load Airplane config");
-+                throw new RuntimeException(ex);
-+            }
-+        }
-+
-+        AirplaneConfig.load(AirplaneConfig.class, null);
-+    }
-+
-+    public static void load(Class<?> clazz, Object instance) {
-+        for (final Method method : clazz.getDeclaredMethods()) {
-+            if (method.getReturnType() != void.class || method.getParameterCount() != 0 ||
-+                    !Modifier.isPrivate(method.getModifiers()) || (instance == null && !Modifier.isStatic(method.getModifiers()))) {
-+                continue;
-+            }
-+
-+            try {
-+                method.setAccessible(true);
-+                method.invoke(instance, EMPTY);
-+            } catch (final Exception ex) {
-+                throw new RuntimeException(ex);
-+            }
-+        }
-+
-+        try {
-+            config.save(AirplaneConfig.configFile);
-+        } catch (final Exception ex) {
-+            System.out.println("Unable to save Airplane config");
-+            ex.printStackTrace();
-+        }
-+    }
-+
-+    private static boolean getBoolean(final String path, final boolean dfl) {
-+        AirplaneConfig.config.addDefault(path, Boolean.valueOf(dfl));
-+        return AirplaneConfig.config.getBoolean(path, dfl);
-+    }
-+
-+    private static int getInt(final String path, final int dfl) {
-+        AirplaneConfig.config.addDefault(path, Integer.valueOf(dfl));
-+        return AirplaneConfig.config.getInt(path, dfl);
-+    }
-+
-+    public static boolean dearEnabled;
-+    public static int startDistance;
-+    public static int startDistanceSquared;
-+    public static int maximumActivationPrio;
-+    public static int activationDistanceMod;
-+    public static boolean dynamicVillagerBehavior;
-+    public static boolean dynamicPiglinBehavior;
-+    public static boolean dynamicHoglinBehavior;
-+    private static void dynamicActivationRange() {
-+        dearEnabled = getBoolean("activation-range.enabled", true);
-+        startDistance = getInt("activation-range.start-distance", 12);
-+        startDistanceSquared = startDistance * startDistance;
-+        maximumActivationPrio = getInt("activation-range.max-tick-freq", 20);
-+        activationDistanceMod = getInt("activation-range.activation-dist-mod", 8);
-+        dynamicVillagerBehavior = getBoolean("behavior-activation.villager", true);
-+        dynamicPiglinBehavior = getBoolean("behavior-activation.piglin", true);
-+        dynamicHoglinBehavior = getBoolean("behavior-activation.hoglin", true);
-+    }
-+
-+    public static byte entityDespawnCheckFrequency;
-+    private static void entitySettings() {
-+        entityDespawnCheckFrequency = (byte) Math.max(getInt("entities.despawn-check-freq", 8), Byte.MAX_VALUE);
-+    }
-+
-+    public static boolean disableMethodProfiler;
-+    public static boolean simplerItemCollision;
-+    private static void miscSettings() {
 +        disableMethodProfiler = getBoolean("misc.disable-method-profiler", true);
 +        simplerItemCollision = getBoolean("misc.simpler-item-collision", false);
-+    }
-+}
+     }
+-
+-
+ }
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 index 5836c44bbd019a7eeaad875eddad9b953f4d6c92..6c93f2d6ab6755898f7fe828bbc863dd1efa7194 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java

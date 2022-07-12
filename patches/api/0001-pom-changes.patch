@@ -7,7 +7,7 @@ Subject: [PATCH] pom changes
 - update dependencies
 
 diff --git a/pom.xml b/pom.xml
-index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389cbd6b2293 100644
+index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..e0632026dfd8b14c475c5b0ec3817f3f971ff0be 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -3,18 +3,18 @@
@@ -52,7 +52,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389c
              <scope>provided</scope>
          </dependency>
          <dependency>
-@@ -95,67 +95,67 @@
+@@ -95,67 +95,73 @@
          <dependency>
              <groupId>com.google.guava</groupId>
              <artifactId>guava</artifactId>
@@ -90,6 +90,12 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389c
 -            <version>3.8.1</version>
 +            <version>3.8.6</version>
              <scope>provided</scope>
++            <exclusions>
++                <exclusion>
++                    <groupId>org.apache.commons</groupId>
++                    <artifactId>commons-lang3</artifactId>
++                </exclusion>
++            </exclusions>
          </dependency>
          <dependency>
              <groupId>org.apache.maven.resolver</groupId>
@@ -130,7 +136,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389c
              <scope>test</scope>
          </dependency>
          <dependency>
-@@ -167,19 +167,19 @@
+@@ -167,19 +173,19 @@
          <dependency>
              <groupId>org.ow2.asm</groupId>
              <artifactId>asm-tree</artifactId>
@@ -153,7 +159,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389c
          </dependency>
      </dependencies>
  
-@@ -202,24 +202,24 @@
+@@ -202,24 +208,24 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-compiler-plugin</artifactId>
@@ -182,7 +188,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389c
                  <configuration>
                      <archive>
                          <manifest>
-@@ -234,7 +234,7 @@
+@@ -234,7 +240,7 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-shade-plugin</artifactId>
@@ -191,7 +197,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389c
                  <executions>
                      <execution>
                          <phase>package</phase>
-@@ -273,13 +273,13 @@
+@@ -273,13 +279,13 @@
              <plugin>
                  <groupId>org.apache.maven.plugins</groupId>
                  <artifactId>maven-javadoc-plugin</artifactId>
@@ -210,7 +216,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389c
                          <!-- Paper start -->
                          <link>https://jd.adventure.kyori.net/api/${adventure.version}/</link>
                          <link>https://jd.adventure.kyori.net/text-serializer-gson/${adventure.version}/</link>
-@@ -303,7 +303,7 @@
+@@ -303,7 +309,7 @@
                      <plugin>
                          <groupId>org.apache.maven.plugins</groupId>
                          <artifactId>maven-checkstyle-plugin</artifactId>
@@ -219,7 +225,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..dc4db42d28dfd961a6bf38d055cf389c
                          <executions>
                              <execution>
                                  <phase>process-classes</phase>
-@@ -320,14 +320,14 @@
+@@ -320,14 +326,14 @@
                              <dependency>
                                  <groupId>com.puppycrawl.tools</groupId>
                                  <artifactId>checkstyle</artifactId>

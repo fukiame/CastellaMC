@@ -7,7 +7,7 @@ Subject: [PATCH] pom changes
 - update dependencies
 
 diff --git a/pom.xml b/pom.xml
-index 7712a8723cddb59829a5181f54098d0bb4083f6e..381db4b3204945e32126867285ee2d798a2d533c 100644
+index 7712a8723cddb59829a5181f54098d0bb4083f6e..b31924882dcae6fdbe70e22a0ad878a633389372 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -3,18 +3,18 @@
@@ -35,6 +35,17 @@ index 7712a8723cddb59829a5181f54098d0bb4083f6e..381db4b3204945e32126867285ee2d79
      <description>API additions that utilize Mojang Specific API's</description>
  
      <properties>
+@@ -49,8 +49,8 @@
+ 
+     <dependencies>
+         <dependency>
+-            <groupId>com.destroystokyo.paper</groupId>
+-            <artifactId>paper-api</artifactId>
++            <groupId>me.kurumifake</groupId>
++            <artifactId>lazinity-api</artifactId>
+             <version>${project.version}</version>
+             <scope>provided</scope>
+         </dependency>
 @@ -58,28 +58,28 @@
          <dependency>
              <groupId>com.mojang</groupId>
