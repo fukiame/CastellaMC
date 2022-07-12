@@ -8,12 +8,10 @@
     <name>Lazinity (Parent)</name>
 
     <repositories>
-        <!--
         <repository>
             <id>aikar</id>
             <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
-        -->
         <repository>
             <id>velocity-snapshots</id>
             <url>https://nexus.velocitypowered.com/repository/velocity-artifacts-snapshots/</url>

@@ -6,10 +6,10 @@ Subject: [PATCH] move Airplane config to yaml
 theres nothing bad with AIR nessecarily saying, its just kinda annoying having multiple file formats to deal with
 
 diff --git a/pom.xml b/pom.xml
-index 2290fc378433c9c6c6b086b3d66ab35518bd6bfd..3903690a305cbd2b91e13c37cee8cdcf0db5c2e3 100644
+index 6e72a7f9391e133471136bbd6e989d018b377cd7..8171bb3a089380188e576fb6cbf6c56bdbf6268e 100644
 --- a/pom.xml
 +++ b/pom.xml
-@@ -223,13 +223,6 @@
+@@ -234,13 +234,6 @@
                  </exclusion>
              </exclusions>
          </dependency>
