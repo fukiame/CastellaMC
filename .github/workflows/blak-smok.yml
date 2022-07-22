@@ -20,7 +20,7 @@ jobs:
         git submodule update --init --recursive
         ./lazinity patch
     - name: get
-      run: tar -czf src.tar.gz Lazinity-*
+      run: tar -czf src.tar.gz Lazinity-* mc-dev
     - uses: actions/upload-artifact@v2
       with:
         name: lazinity-src
