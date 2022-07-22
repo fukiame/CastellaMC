@@ -103,7 +103,7 @@ fi
 ###############################################################################################
 
 #import world/item/ItemWrittenBook
-import network/protocol/game/PacketPlayInWindowClick.java
+import network/protocol/game/PacketPlayInWindowClick
 ########################################################
 ########################################################
 ########################################################
