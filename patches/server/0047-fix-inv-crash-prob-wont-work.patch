@@ -1,0 +1,18 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Fri, 22 Jul 2022 17:10:04 +0700
+Subject: [PATCH] fix inv crash prob wont work
+
+
+diff --git a/src/main/java/net/minecraft/network/protocol/game/PacketPlayInWindowClick.java b/src/main/java/net/minecraft/network/protocol/game/PacketPlayInWindowClick.java
+index d4c6923fb9076608b4bc42913e17ab3fdc10d3fd..e612727012937749202dbb26c0a51931bfa84600 100644
+--- a/src/main/java/net/minecraft/network/protocol/game/PacketPlayInWindowClick.java
++++ b/src/main/java/net/minecraft/network/protocol/game/PacketPlayInWindowClick.java
+@@ -27,6 +27,7 @@ public class PacketPlayInWindowClick implements Packet<PacketListenerPlayIn> {
+     public void a(PacketDataSerializer packetdataserializer) throws IOException {
+         this.a = packetdataserializer.readByte();
+         this.slot = packetdataserializer.readShort();
++        if (slot > 90) short = 1; // Lazinity - dumb attempt at fixing inv crash
+         this.button = packetdataserializer.readByte();
+         this.d = packetdataserializer.readShort();
+         this.shift = (InventoryClickType) packetdataserializer.a(InventoryClickType.class);
