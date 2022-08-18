@@ -1,0 +1,32 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Thu, 18 Aug 2022 11:30:25 +0700
+Subject: [PATCH] tcp fastopen
+
+
+diff --git a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java b/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
+index 3d58dd42f02670ea24d90417e6e75cd78dc86eab..b9653e27f6a7e17e9ec05f0b9475b462c9cf6d06 100644
+--- a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
++++ b/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
+@@ -165,4 +165,9 @@ public final class LazinityConfig {
+     private static void allowServerMetrics() {
+         serverMetrics = getBoolean("bstats-metrics", serverMetrics);
+     }
++
++    public static boolean useTCPFASTOPEN = false;
++    private static void tcpFastOpen() {
++        useTCPFASTOPEN = getBoolean("use-tcp-fast-open", useTCPFASTOPEN);
++    }
+ }
+diff --git a/src/main/java/net/minecraft/server/network/ServerConnection.java b/src/main/java/net/minecraft/server/network/ServerConnection.java
+index 69a982832489fc78fd46418341bdcba1e2be69e9..8a4e8545db7f6f2ae8bb4a9038c2f1e582dad214 100644
+--- a/src/main/java/net/minecraft/server/network/ServerConnection.java
++++ b/src/main/java/net/minecraft/server/network/ServerConnection.java
+@@ -108,6 +108,7 @@ public class ServerConnection {
+                     } catch (ChannelException channelexception) {
+                         ;
+                     }
++                    if (me.kurumifake.lazinity.LazinityConfig.useTCPFASTOPEN) channel.config().setOption(ChannelOption.TCP_FASTOPEN, 3); // Lazinity - TCP fast open
+ 
+                     if (!disableFlushConsolidation) channel.pipeline().addFirst(new FlushConsolidationHandler()); // Paper
+                     channel.pipeline().addLast("timeout", new ReadTimeoutHandler(30)).addLast("legacy_query", new LegacyPingHandler(ServerConnection.this)).addLast("splitter", new PacketSplitter()).addLast("decoder", new PacketDecoder(EnumProtocolDirection.SERVERBOUND)).addLast("prepender", new PacketPrepender()).addLast("encoder", new PacketEncoder(EnumProtocolDirection.CLIENTBOUND));
