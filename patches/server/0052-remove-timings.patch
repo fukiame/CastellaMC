@@ -936,9 +936,18 @@ index 1a4e6f5ce8fd87179916729e7ad64ee3e37d2fda..82da38eea4dccc24c95017153497a503
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/EntityTypes.java b/src/main/java/net/minecraft/world/entity/EntityTypes.java
-index 7f70dda656ff9d802200f18139d2695e58c551c7..d43a85ee627bdf05cac7e67a0ce2d850ecf03868 100644
+index 7f70dda656ff9d802200f18139d2695e58c551c7..fe7ec35e6e9724e5147d4bc87af9dfe1e4318b35 100644
 --- a/src/main/java/net/minecraft/world/entity/EntityTypes.java
 +++ b/src/main/java/net/minecraft/world/entity/EntityTypes.java
+@@ -285,7 +285,7 @@ public class EntityTypes<T extends Entity> {
+         return IRegistry.ENTITY_TYPE.getOptional(MinecraftKey.a(s));
+     }
+ 
+-    public final String id;
++    //public final String id;
+     public EntityTypes(EntityTypes.b<T> entitytypes_b, EnumCreatureType enumcreaturetype, boolean flag, boolean flag1, boolean flag2, boolean flag3, ImmutableSet<Block> immutableset, EntitySize entitysize, int i, int j) { this(entitytypes_b, enumcreaturetype, flag, flag1, flag2, flag3, immutableset, entitysize, i, j, "custom"); } // Paper - old signature
+     public EntityTypes(EntityTypes.b<T> entitytypes_b, EnumCreatureType enumcreaturetype, boolean flag, boolean flag1, boolean flag2, boolean flag3, ImmutableSet<Block> immutableset, EntitySize entitysize, int i, int j, String id) { // Paper - add id
+         this.bf = entitytypes_b;
 @@ -299,6 +299,7 @@ public class EntityTypes<T extends Entity> {
          this.bm = i;
          this.bn = j;
