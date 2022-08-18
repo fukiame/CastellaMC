@@ -10,7 +10,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         distribution: 'temurin'
-        java-version: 8
+        java-version: 11
         cache: 'maven'
     - name: patch
       run: |
@@ -22,5 +22,5 @@ jobs:
       run: ./lazinity jar fast ci
     - uses: actions/upload-artifact@v2
       with:
-        name: Lazinity-JDK8
+        name: Lazinity-JDK11
         path: lazinity-paperclip.jar
