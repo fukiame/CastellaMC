@@ -1,0 +1,39 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Thu, 18 Aug 2022 13:47:19 +0700
+Subject: [PATCH] Revert "Distance manager tick timings"
+
+This reverts commit c9106218350e98916b0937fd4a8e20f46d2f79a5.
+
+diff --git a/src/main/java/co/aikar/timings/MinecraftTimings.java b/src/main/java/co/aikar/timings/MinecraftTimings.java
+index 67980e1dc186c0b458eca9f00acfea7d2b26d575..9d64fffd10ce21a26541198b0c2fd8f0c77f47f1 100644
+--- a/src/main/java/co/aikar/timings/MinecraftTimings.java
++++ b/src/main/java/co/aikar/timings/MinecraftTimings.java
+@@ -47,7 +47,6 @@ public final class MinecraftTimings {
+     public static final Timing antiXrayObfuscateTimer = Timings.ofSafe("anti-xray - obfuscate");
+ 
+     public static final Timing scoreboardScoreSearch = Timings.ofSafe("Scoreboard score search"); // Tuinity - add timings for scoreboard search
+-    public static final Timing distanceManagerTick = Timings.ofSafe("Distance Manager Tick"); // Tuinity - add timings for distance manager
+ 
+     private static final Map<Class<?>, String> taskNameCache = new MapMaker().weakKeys().makeMap();
+ 
+diff --git a/src/main/java/net/minecraft/server/level/ChunkProviderServer.java b/src/main/java/net/minecraft/server/level/ChunkProviderServer.java
+index e31766151450ffa44937feb728f6368e61acd2cd..aff92e0c8fefe30d8680f941546597049a2ddc9f 100644
+--- a/src/main/java/net/minecraft/server/level/ChunkProviderServer.java
++++ b/src/main/java/net/minecraft/server/level/ChunkProviderServer.java
+@@ -841,7 +841,6 @@ public class ChunkProviderServer extends IChunkProvider {
+     public boolean tickDistanceManager() { // Paper - private -> public
+         if (chunkMapDistance.delayDistanceManagerTick) return false; // Paper
+         if (this.playerChunkMap.unloadingPlayerChunk) { MinecraftServer.LOGGER.fatal("Cannot tick distance manager while unloading playerchunks", new Throwable()); throw new IllegalStateException("Cannot tick distance manager while unloading playerchunks"); } // Tuinity
+-        co.aikar.timings.MinecraftTimings.distanceManagerTick.startTiming(); try { // Tuinity - add timings for distance manager
+         boolean flag = this.chunkMapDistance.a(this.playerChunkMap);
+         boolean flag1 = this.playerChunkMap.b();
+ 
+@@ -851,7 +850,6 @@ public class ChunkProviderServer extends IChunkProvider {
+             this.clearCache();
+             return true;
+         }
+-        } finally { co.aikar.timings.MinecraftTimings.distanceManagerTick.stopTiming(); } // Tuinity - add timings for distance manager
+     }
+ 
+     public final boolean isInEntityTickingChunk(Entity entity) { return this.a(entity); } // Paper - OBFHELPER

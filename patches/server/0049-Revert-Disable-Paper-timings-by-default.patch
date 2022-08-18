@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Thu, 18 Aug 2022 12:24:07 +0700
+Subject: [PATCH] Revert "Disable Paper timings by default"
+
+This reverts commit 691accabdfa1bd84f668f29524a2df8c7fa01536.
+
+diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
+index 40d141cc15c074d4c90c70dad60b3df6e1d1dfdf..8a5b2353c725cbb8a6002f562d580dda875cdffe 100644
+--- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
++++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
+@@ -202,15 +202,6 @@ public class PaperConfig {
+     public static String timingsServerName;
+     private static void timings() {
+         boolean timings = getBoolean("timings.enabled", true);
+-        // Airplane start
+-        boolean reallyEnableTimings = getBoolean("timings.really-enabled", false);
+-        if (timings && !reallyEnableTimings) {
+-            Bukkit.getLogger().log(Level.WARNING, "[Airplane] To improve performance, timings have been disabled by default");
+-            Bukkit.getLogger().log(Level.WARNING, "[Airplane] You can still use timings by using /timings on, but they will not start on server startup unless you set timings.really-enabled to true in paper.yml");
+-            Bukkit.getLogger().log(Level.WARNING, "[Airplane] If you would like to disable this message, either set timings.really-enabled to true or timings.enabled to false.");
+-        }
+-        timings = reallyEnableTimings;
+-        // Airplane end
+         boolean verboseTimings = getBoolean("timings.verbose", true);
+         TimingsManager.privacy = getBoolean("timings.server-name-privacy", false);
+         TimingsManager.hiddenConfigs = getList("timings.hidden-config-entries", Lists.newArrayList("database", "settings.bungeecord-addresses", "settings.velocity-support.secret"));
