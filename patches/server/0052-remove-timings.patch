@@ -503,7 +503,7 @@ index aff92e0c8fefe30d8680f941546597049a2ddc9f..ebe7e1e0947dd0ab80ffa76a3c4fca30
              if (flag1) {
                  try (co.aikar.timings.Timing ignored = this.world.timings.miscMobSpawning.startTiming()) { // Paper - timings
 diff --git a/src/main/java/net/minecraft/server/level/PlayerChunkMap.java b/src/main/java/net/minecraft/server/level/PlayerChunkMap.java
-index abdf21d38468f2ad96b3065dcb67a061c48c718c..04d6c2b43954f8031227c552944d331d25ac2182 100644
+index abdf21d38468f2ad96b3065dcb67a061c48c718c..d08e849a3214faf38a9f5a5f580c9ba2ea4c9565 100644
 --- a/src/main/java/net/minecraft/server/level/PlayerChunkMap.java
 +++ b/src/main/java/net/minecraft/server/level/PlayerChunkMap.java
 @@ -1026,15 +1026,15 @@ public class PlayerChunkMap extends IChunkLoader implements PlayerChunk.d {
@@ -596,10 +596,19 @@ index abdf21d38468f2ad96b3065dcb67a061c48c718c..04d6c2b43954f8031227c552944d331d
  
              return !chunkstatus.b(ChunkStatus.FULL) ? PlayerChunk.UNLOADED_CHUNK_ACCESS : either.mapLeft((ichunkaccess) -> {
 -            try (Timing ignored = world.timings.chunkPostLoad.startTimingIfSync()) { // Paper
-+            try /*(Timing ignored = world.timings.chunkPostLoad.startTimingIfSync())*/ { // Paper
++            //try (Timing ignored = world.timings.chunkPostLoad.startTimingIfSync()) { // Paper
                  ChunkCoordIntPair chunkcoordintpair = playerchunk.i();
                  Chunk chunk;
  
+@@ -1477,7 +1477,7 @@ public class PlayerChunkMap extends IChunkLoader implements PlayerChunk.d {
+                 }
+ 
+                 return chunk;
+-                } // Paper
++                //} // Paper
+             });
+         }, (runnable) -> {
+             Mailbox mailbox = this.mailboxMain;
 @@ -1570,7 +1570,7 @@ public class PlayerChunkMap extends IChunkLoader implements PlayerChunk.d {
      }
  
@@ -705,7 +714,7 @@ index abdf21d38468f2ad96b3065dcb67a061c48c718c..04d6c2b43954f8031227c552944d331d
  
  
 diff --git a/src/main/java/net/minecraft/server/level/WorldServer.java b/src/main/java/net/minecraft/server/level/WorldServer.java
-index 68b8db53678d1390342e50cda2bb559766fa92b3..ee693801321a314c66800615a14c092641c795d2 100644
+index 68b8db53678d1390342e50cda2bb559766fa92b3..ac54d10a81388e11ebbfaf70aaf894ad54a3137b 100644
 --- a/src/main/java/net/minecraft/server/level/WorldServer.java
 +++ b/src/main/java/net/minecraft/server/level/WorldServer.java
 @@ -1044,26 +1044,26 @@ public class WorldServer extends World implements GeneratorAccessSeed {
@@ -797,39 +806,43 @@ index 68b8db53678d1390342e50cda2bb559766fa92b3..ee693801321a314c66800615a14c0926
              // Paper end
          }
      }
-@@ -1478,7 +1478,7 @@ public class WorldServer extends World implements GeneratorAccessSeed {
+@@ -1478,8 +1478,8 @@ public class WorldServer extends World implements GeneratorAccessSeed {
              // Spigot end
              // Paper start- timings
              final boolean isActive = org.spigotmc.ActivationRange.checkIfActive(entity);
 -            timer = isActive ? entity.getEntityType().tickTimer.startTiming() : entity.getEntityType().inactiveTickTimer.startTiming(); // Paper
+-            try {
 +            //timer = isActive ? entity.getEntityType().tickTimer.startTiming() : entity.getEntityType().inactiveTickTimer.startTiming(); // Paper
-             try {
++            //try {
              // Paper end - timings
              entity.g(entity.locX(), entity.locY(), entity.locZ());
+             entity.lastYaw = entity.yaw;
 @@ -1506,7 +1506,7 @@ public class WorldServer extends World implements GeneratorAccessSeed {
              }
  
              this.chunkCheck(entity);
 -            } finally { timer.stopTiming(); } // Paper - timings
-+            } //finally { timer.stopTiming(); } // Paper - timings
++            //} finally { timer.stopTiming(); } // Paper - timings
              if (entity.inChunk) {
                  Iterator iterator = entity.getPassengers().iterator();
  
-@@ -1533,7 +1533,7 @@ public class WorldServer extends World implements GeneratorAccessSeed {
+@@ -1533,8 +1533,8 @@ public class WorldServer extends World implements GeneratorAccessSeed {
              if (entity1 instanceof EntityHuman || this.getChunkProvider().a(entity1)) {
                  // Paper - EAR 2
                  final boolean isActive = org.spigotmc.ActivationRange.checkIfActive(entity1);
 -                co.aikar.timings.Timing timer = isActive ? entity1.getEntityType().passengerTickTimer.startTiming() : entity1.getEntityType().passengerInactiveTickTimer.startTiming(); // Paper
+-                try {
 +                //co.aikar.timings.Timing timer = isActive ? entity1.getEntityType().passengerTickTimer.startTiming() : entity1.getEntityType().passengerInactiveTickTimer.startTiming(); // Paper
-                 try {
++                //try {
                  // Paper end
                  entity1.g(entity1.locX(), entity1.locY(), entity1.locZ());
+                 entity1.lastYaw = entity1.yaw;
 @@ -1570,7 +1570,7 @@ public class WorldServer extends World implements GeneratorAccessSeed {
  
                          this.a(entity1, entity2);
                      }
 -                } } finally { timer.stopTiming(); } // Paper - EAR2 timings
-+                } } //finally { timer.stopTiming(); } // Paper - EAR2 timings
++                } //} finally { timer.stopTiming(); } // Paper - EAR2 timings
  
              }
          } else {
