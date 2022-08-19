@@ -24,7 +24,7 @@ index 2bc8b83f41bfdaa7ffd2e66c7ad3476e26002da5..41642af65b719ea829f0f32b8e4c2da7
  
      <!-- This builds a completely 'ready to start' jar with all dependencies inside -->
 diff --git a/src/main/java/gg/airplane/AirplaneCommand.java b/src/main/java/gg/airplane/AirplaneCommand.java
-index 89c89e633f14b5820147e734b1b7ad8cadfdce80..a940c8590e1612473948d6d4dc3a574667952505 100644
+index 1b6bcb083ad2439bbfc4310a43bfd165ab350cb6..5098272bc37ec929c60487659966f671013242a7 100644
 --- a/src/main/java/gg/airplane/AirplaneCommand.java
 +++ b/src/main/java/gg/airplane/AirplaneCommand.java
 @@ -46,6 +46,8 @@ public class AirplaneCommand extends Command {

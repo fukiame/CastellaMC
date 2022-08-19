@@ -4,6 +4,19 @@ Date: Tue, 12 Apr 2022 10:28:27 +0000
 Subject: [PATCH] useless patch xd
 
 
+diff --git a/src/main/java/org/bukkit/Bukkit.java b/src/main/java/org/bukkit/Bukkit.java
+index e8414592b3afeb1e5db2b817b8fb7c13e073b9aa..07372515267a87c7b47159f6fa58cda577a42d4f 100644
+--- a/src/main/java/org/bukkit/Bukkit.java
++++ b/src/main/java/org/bukkit/Bukkit.java
+@@ -85,7 +85,7 @@ public final class Bukkit {
+         }
+ 
+         Bukkit.server = server;
+-        server.getLogger().info("This server is running " + getName() + " version " + getVersion() + " (Implementing API version " + getBukkitVersion() + ")");
++        server.getLogger().info("Running " + getName() + " version " + getVersion() + " (API version " + getBukkitVersion() + ")");
+     }
+ 
+     /**
 diff --git a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java b/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
 index 0c7ba0718de2b93d013968ca0fec34ffd423990f..3a0a24af4d0b73ee0ca17e0b8e8dcf812d66e7eb 100644
 --- a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
