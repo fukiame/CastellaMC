@@ -7,7 +7,7 @@ Original code by Titaniumtown, licensed under GNU General Public License v3.0
 You can find the original code on https://gitlab.com/Titaniumtown/JettPack
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
-index 45ca5d309a17e75202a2f894f7a11b373eea95fd..4fef5290a1f8f9264b784cad7be7bd6541ad4f4b 100644
+index 45ca5d309a17e75202a2f894f7a11b373eea95fd..a5c24358166ce7cfb66d94d4b77c97d01d4ce1de 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
 @@ -111,7 +111,7 @@ public class DedicatedServerProperties extends PropertyManager<DedicatedServerPr
@@ -19,8 +19,3 @@ index 45ca5d309a17e75202a2f894f7a11b373eea95fd..4fef5290a1f8f9264b784cad7be7bd65
          this.enableJmxMonitoring = this.getBoolean("enable-jmx-monitoring", false);
          this.enableStatus = this.getBoolean("enable-status", true);
          this.entityBroadcastRangePercentage = this.a("entity-broadcast-range-percentage", (integer) -> {
-@@ -138,3 +138,4 @@ public class DedicatedServerProperties extends PropertyManager<DedicatedServerPr
-         // CraftBukkit end
-     }
- }
-+y
