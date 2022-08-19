@@ -1,0 +1,20 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Philip Kelley <philip@thoriumcube.org>
+Date: Wed, 16 Mar 2022 12:05:59 +0000
+Subject: [PATCH] (Paper-1.18.2) Fix saving in unloadWorld
+
+Change savingDisabled to false to ensure ServerLevel's saving logic gets called when unloadWorld is called with save = true
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index a776f9d0c4304c4c3207a509d8c18ce76bbdf778..d053b518cbd4df3bdcb6a7ae570e42cc7ae4854b 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -1238,7 +1238,7 @@ public final class CraftServer implements Server {
+ 
+         try {
+             if (save) {
+-                handle.save(null, true, true);
++                handle.save(null, true, false); // Paper - don't disable saving
+             }
+ 
+             handle.getChunkProvider().close(save);
