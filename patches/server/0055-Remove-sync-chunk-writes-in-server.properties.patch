@@ -1,0 +1,26 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Simon Gardling <titaniumtown@gmail.com>
+Date: Mon, 6 Dec 2021 10:27:12 -0500
+Subject: [PATCH] Remove 'sync-chunk-writes' in server.properties
+
+Original code by Titaniumtown, licensed under GNU General Public License v3.0
+You can find the original code on https://gitlab.com/Titaniumtown/JettPack
+
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
+index 45ca5d309a17e75202a2f894f7a11b373eea95fd..4fef5290a1f8f9264b784cad7be7bd6541ad4f4b 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
+@@ -111,7 +111,7 @@ public class DedicatedServerProperties extends PropertyManager<DedicatedServerPr
+         this.maxWorldSize = this.a("max-world-size", (integer) -> {
+             return MathHelper.clamp(integer, 1, 29999984);
+         }, 29999984);
+-        this.syncChunkWrites = this.getBoolean("sync-chunk-writes", true) && Boolean.getBoolean("Paper.enable-sync-chunk-writes"); // Paper - hide behind flag
++        this.syncChunkWrites = Boolean.getBoolean("Paper.enable-sync-chunk-writes"); // Paper - hide behind flag // Lazinity - wipe from server.properties
+         this.enableJmxMonitoring = this.getBoolean("enable-jmx-monitoring", false);
+         this.enableStatus = this.getBoolean("enable-status", true);
+         this.entityBroadcastRangePercentage = this.a("entity-broadcast-range-percentage", (integer) -> {
+@@ -138,3 +138,4 @@ public class DedicatedServerProperties extends PropertyManager<DedicatedServerPr
+         // CraftBukkit end
+     }
+ }
++y

@@ -1,0 +1,76 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Simon Gardling <titaniumtown@gmail.com>
+Date: Mon, 6 Dec 2021 10:34:33 -0500
+Subject: [PATCH] Remove Spigot tick limiter
+
+Original code by Titaniumtown, licensed under GNU General Public License v3.0
+You can find the original code on https://gitlab.com/Titaniumtown/JettPack
+
+diff --git a/src/main/java/net/minecraft/world/level/World.java b/src/main/java/net/minecraft/world/level/World.java
+index 7826ea3a924b6d99e1ef96eb2f722ae29286c04d..228c2f39f63a65e35c6b3e54f2070f05cc1649a8 100644
+--- a/src/main/java/net/minecraft/world/level/World.java
++++ b/src/main/java/net/minecraft/world/level/World.java
+@@ -162,8 +162,6 @@ public abstract class World implements GeneratorAccess, AutoCloseable {
+ 
+     public final co.aikar.timings.WorldTimingsHandler timings; // Paper
+     public static BlockPosition lastPhysicsProblem; // Spigot
+-    private org.spigotmc.TickLimiter entityLimiter;
+-    private org.spigotmc.TickLimiter tileLimiter;
+     private int tileTickPosition;
+     public final Map<Explosion.CacheKey, Float> explosionDensityCache = new HashMap<>(); // Paper - Optimize explosions
+     public java.util.ArrayDeque<BlockRedstoneTorch.RedstoneUpdateInfo> redstoneUpdateInfos; // Paper - Move from Map in BlockRedstoneTorch to here
+@@ -325,8 +323,6 @@ public abstract class World implements GeneratorAccess, AutoCloseable {
+         // CraftBukkit end
+         timings = new co.aikar.timings.WorldTimingsHandler(this); // Paper - code below can generate new world and access timings
+         this.keepSpawnInMemory = this.paperConfig.keepSpawnInMemory; // Paper
+-        this.entityLimiter = new org.spigotmc.TickLimiter(spigotConfig.entityMaxTickTime);
+-        this.tileLimiter = new org.spigotmc.TickLimiter(spigotConfig.tileMaxTickTime);
+     }
+ 
+     // Paper start
+diff --git a/src/main/java/org/spigotmc/SpigotWorldConfig.java b/src/main/java/org/spigotmc/SpigotWorldConfig.java
+index 094a934c168d232b0550c3efe722f2ebfbdf8e24..538ee547688ba864f99c1f37b44df2c9b16e7525 100644
+--- a/src/main/java/org/spigotmc/SpigotWorldConfig.java
++++ b/src/main/java/org/spigotmc/SpigotWorldConfig.java
+@@ -397,15 +397,6 @@ public class SpigotWorldConfig
+         hangingTickFrequency = getInt( "hanging-tick-frequency", 100 );
+     }
+ 
+-    public int tileMaxTickTime;
+-    public int entityMaxTickTime;
+-    private void maxTickTimes()
+-    {
+-        tileMaxTickTime = getInt("max-tick-time.tile", 50);
+-        entityMaxTickTime = getInt("max-tick-time.entity", 50);
+-        log("Tile Max Tick Time: " + tileMaxTickTime + "ms Entity max Tick Time: " + entityMaxTickTime + "ms");
+-    }
+-
+     public double squidSpawnRangeMin;
+     private void squidSpawnRange()
+     {
+diff --git a/src/main/java/org/spigotmc/TickLimiter.java b/src/main/java/org/spigotmc/TickLimiter.java
+deleted file mode 100644
+index 23a39382be1541d31713a587a60079d0754c908b..0000000000000000000000000000000000000000
+--- a/src/main/java/org/spigotmc/TickLimiter.java
++++ /dev/null
+@@ -1,20 +0,0 @@
+-package org.spigotmc;
+-
+-public class TickLimiter {
+-
+-    private final int maxTime;
+-    private long startTime;
+-
+-    public TickLimiter(int maxtime) {
+-        this.maxTime = maxtime;
+-    }
+-
+-    public void initTick() {
+-        startTime = System.currentTimeMillis();
+-    }
+-
+-    public boolean shouldContinue() {
+-        long remaining = System.currentTimeMillis() - startTime;
+-        return remaining < maxTime;
+-    }
+-}
