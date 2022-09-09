@@ -1,0 +1,24 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KurumiFake <kurumiisshidowife@gmail.com>
+Date: Fri, 9 Sep 2022 07:13:22 +0700
+Subject: [PATCH] default spam exc
+
+
+diff --git a/src/main/java/org/spigotmc/SpigotConfig.java b/src/main/java/org/spigotmc/SpigotConfig.java
+index 564285c1c96f3faf99022eec639dbefed54f2a7d..b9a45046a8396f78e13129ab67f3c51fdbec0e51 100644
+--- a/src/main/java/org/spigotmc/SpigotConfig.java
++++ b/src/main/java/org/spigotmc/SpigotConfig.java
+@@ -302,10 +302,10 @@ public class SpigotConfig
+     public static List<String> spamExclusions;
+     private static void spamExclusions()
+     {
+-        spamExclusions = getList( "commands.spam-exclusions", Arrays.asList( new String[]
+-        {
++        spamExclusions = getList( "commands.spam-exclusions", Arrays.asList( new String[0]
++        /*{
+                 "/skill"
+-        } ) );
++        }*/ ) );
+     }
+ 
+     public static boolean silentCommandBlocks;
