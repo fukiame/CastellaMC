@@ -7,7 +7,7 @@ https://github.com/hpfxd/PandaSpigot/blob/b1017cd457646c1cf7da99c75d291cd2e7724d
 Patch licensed under GPLv3
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-index 1e2683e45d17b1f3b35cf7293f413e974eb1022f..d6b4e30dfecd7dc20561c71874a571afbe09dab3 100644
+index 7a86357ea75db7263598b79d31d4ae9abe5e4b50..8c20c965a105f894e25d5cf2fe2fbc149b9d84e7 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
 @@ -277,6 +277,12 @@ public class PaperConfig {

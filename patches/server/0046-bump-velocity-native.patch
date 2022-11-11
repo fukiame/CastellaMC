@@ -6,7 +6,7 @@ Subject: [PATCH] bump velocity native
 bumped minimum java ver to 11 too as a result
 
 diff --git a/pom.xml b/pom.xml
-index a97c408de47d65e0ec2633bdf1ea4cb225c1250c..01cb9e51abf8ca19586314610cdc00463246736b 100644
+index 603e22577aabb87e1b693f96602655fe808fd9fc..b803a1f1bf1497e8a49befce6db1eff187b62dc4 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -14,8 +14,8 @@

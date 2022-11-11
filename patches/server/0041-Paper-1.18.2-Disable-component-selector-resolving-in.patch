@@ -6,7 +6,7 @@ Subject: [PATCH] (Paper-1.18.2) Disable component selector resolving in books
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-index d6b4e30dfecd7dc20561c71874a571afbe09dab3..40d141cc15c074d4c90c70dad60b3df6e1d1dfdf 100644
+index 8c20c965a105f894e25d5cf2fe2fbc149b9d84e7..67a171d3573458484c71bdc6c57d98193c03de39 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
 @@ -516,4 +516,9 @@ public class PaperConfig {

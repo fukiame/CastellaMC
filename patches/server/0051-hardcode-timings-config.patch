@@ -6,7 +6,7 @@ Subject: [PATCH] hardcode timings config
 SINCE ITS GONE ANYWAYS LMAOOOOO
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-index 8a5b2353c725cbb8a6002f562d580dda875cdffe..9d43202c13c57fd65bb8251e9b0abe87dd5737b0 100644
+index dac1769b4d772e0c76f95c3593ab198d3a86d6c1..a07edc42268ea49494e81567088e275cb93b04e9 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
 @@ -201,16 +201,13 @@ public class PaperConfig {

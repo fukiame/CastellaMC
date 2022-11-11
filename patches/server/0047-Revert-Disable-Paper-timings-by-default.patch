@@ -6,7 +6,7 @@ Subject: [PATCH] Revert "Disable Paper timings by default"
 This reverts commit 691accabdfa1bd84f668f29524a2df8c7fa01536.
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-index 40d141cc15c074d4c90c70dad60b3df6e1d1dfdf..8a5b2353c725cbb8a6002f562d580dda875cdffe 100644
+index 67a171d3573458484c71bdc6c57d98193c03de39..dac1769b4d772e0c76f95c3593ab198d3a86d6c1 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
 @@ -202,15 +202,6 @@ public class PaperConfig {
