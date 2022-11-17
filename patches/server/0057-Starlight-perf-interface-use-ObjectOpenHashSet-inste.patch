@@ -1,10 +1,10 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: Ilari Suhonen <ilari.suhonen@gmail.com>
-Date: Thu, 29 Sep 2022 09:04:52 -0700
-Subject: [PATCH] Reduce allocation rate for checkBlock
+From: bluelhf <ilari.suhonen@gmail.com>
+Date: Thu, 22 Sep 2022 00:05:24 +0300
+Subject: [PATCH] (Starlight) perf(interface): use ObjectOpenHashSet instead of
+ HashSet
 
-Use ObjectOpenHashSet instead of HashSet
-Remove unnecessary chunkToSave modification
+// taken from https://github.com/PaperMC/Starlight/pull/160/commits/34151bedc71fbe329b380da35720c4fefa9aa103
 
 diff --git a/src/main/java/com/tuinity/tuinity/chunk/light/StarLightInterface.java b/src/main/java/com/tuinity/tuinity/chunk/light/StarLightInterface.java
 index df686b97460796004cad1477760647a98741d751..42b3987e9d1b2f896986e8d2100f6faf236368f4 100644
