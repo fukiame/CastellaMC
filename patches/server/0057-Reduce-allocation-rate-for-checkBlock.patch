@@ -1,0 +1,37 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ilari Suhonen <ilari.suhonen@gmail.com>
+Date: Thu, 29 Sep 2022 09:04:52 -0700
+Subject: [PATCH] Reduce allocation rate for checkBlock
+
+Use ObjectOpenHashSet instead of HashSet
+Remove unnecessary chunkToSave modification
+
+diff --git a/src/main/java/com/tuinity/tuinity/chunk/light/StarLightInterface.java b/src/main/java/com/tuinity/tuinity/chunk/light/StarLightInterface.java
+index df686b97460796004cad1477760647a98741d751..42b3987e9d1b2f896986e8d2100f6faf236368f4 100644
+--- a/src/main/java/com/tuinity/tuinity/chunk/light/StarLightInterface.java
++++ b/src/main/java/com/tuinity/tuinity/chunk/light/StarLightInterface.java
+@@ -5,6 +5,7 @@ import com.tuinity.tuinity.util.WorldUtil;
+ import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+ import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+ import it.unimi.dsi.fastutil.shorts.ShortCollection;
++import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+ import net.minecraft.core.BlockPosition;
+ import net.minecraft.server.level.WorldServer;
+ import net.minecraft.world.level.ChunkCoordIntPair;
+@@ -15,7 +16,6 @@ import net.minecraft.world.level.lighting.LightEngineLayerEventListener;
+ import net.minecraft.world.level.chunk.NibbleArray;
+ import net.minecraft.core.SectionPosition;
+ import java.util.ArrayDeque;
+-import java.util.HashSet;
+ import java.util.Iterator;
+ import java.util.Set;
+ import java.util.function.Consumer;
+@@ -482,7 +482,7 @@ public final class StarLightInterface {
+         // note: on the main thread, empty section changes are queued before block changes. This means we don't need
+         // to worry about cases where a block change is called inside an empty chunk section, according to the "emptiness" map per chunk,
+         // for example.
+-        public final Set<BlockPosition> changedPositions = new HashSet<>();
++        public final Set<BlockPosition> changedPositions = new ObjectOpenHashSet<>();
+ 
+         public Boolean[] changedSectionSet;
+ 
