@@ -883,7 +883,7 @@ index 68b8db53678d1390342e50cda2bb559766fa92b3..ac54d10a81388e11ebbfaf70aaf894ad
  
          // CraftBukkit start - moved from MinecraftServer.saveChunks
 diff --git a/src/main/java/net/minecraft/server/network/PlayerConnection.java b/src/main/java/net/minecraft/server/network/PlayerConnection.java
-index a6c4ac6fb2ebd16d3ec6b4944f5cf65ad4195497..4142e6205d15447381b68a778551a86ea07257ea 100644
+index d071f3d277ff25b8bc5760091b25fd5fdd11fdc9..5242415858656df58c6350bf44cd8fd20ca4f5bf 100644
 --- a/src/main/java/net/minecraft/server/network/PlayerConnection.java
 +++ b/src/main/java/net/minecraft/server/network/PlayerConnection.java
 @@ -2249,7 +2249,7 @@ public class PlayerConnection implements PacketListenerPlayIn {

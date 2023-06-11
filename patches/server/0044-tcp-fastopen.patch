@@ -5,12 +5,12 @@ Subject: [PATCH] tcp fastopen
 
 
 diff --git a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java b/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
-index fedac8069ec87c3e9bc7e5a0a7381e362734bb5b..efe95332ac672c6e8423d0f367d227ba06b82262 100644
+index a4ab3ef6e89033fc47f3d2339b0827207fe05b22..8a8c9ebdb82f418ea1c868fe31bf4ffe87b0bf3b 100644
 --- a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
 +++ b/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
-@@ -160,4 +160,9 @@ public final class LazinityConfig {
-         checkVehicleMovedQuickly = getBoolean("movement-checks.vehicle-moved-quickly", checkVehicleMovedQuickly);
-         checkVehicleMovedWrongly = getBoolean("movement-checks.vehicle-moved-wrongly", checkVehicleMovedWrongly);
+@@ -149,4 +149,9 @@ public final class LazinityConfig {
+     private static void fireBlockPhysicsEvent() {
+         fireBlockPhysicsEvent = getBoolean("fire-block-physics-event", true);
      }
 +
 +    public static boolean useTCPFASTOPEN = false;
