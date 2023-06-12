@@ -103,7 +103,6 @@ fi
 ###############################################################################################
 
 #import world/item/ItemWrittenBook
-import network/protocol/game/PacketPlayInWindowClick
 ########################################################
 ########################################################
 ########################################################
@@ -113,9 +112,6 @@ import network/protocol/game/PacketPlayInWindowClick
 #             # group    # lib          # prefix               # many files
 
 #importLibrary com.mojang datafixerupper com/mojang/datafixers/util Either.java
-importLibrary com.mojang brigadier  com/mojang/brigadier/tree LiteralCommandNode.java
-importLibrary com.mojang brigadier  com/mojang/brigadier/suggestion SuggestionsBuilder.java
-importLibrary com.mojang brigadier  com/mojang/brigadier/arguments BoolArgumentType.java
 ################
 (
     cd Airplane/Airplane-Server/
