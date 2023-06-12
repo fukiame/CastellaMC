@@ -7,7 +7,7 @@ Subject: [PATCH] pom changes
 - update dependencies
 
 diff --git a/pom.xml b/pom.xml
-index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..510596ece861de6f71219d57b7513d43ea0d3c1f 100644
+index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..685cfee2655f5822d668b7db89076499d3e3b9d0 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -3,18 +3,18 @@
@@ -80,7 +80,7 @@ index 329ba2f5828afecdfa1eb19518dd4eda2ca5d4ff..510596ece861de6f71219d57b7513d43
              <groupId>org.yaml</groupId>
              <artifactId>snakeyaml</artifactId>
 -            <version>1.27</version>
-+            <version>2.0</version>
++            <version>1.33</version>
              <scope>compile</scope>
          </dependency>
          <!-- not part of the API proper -->
