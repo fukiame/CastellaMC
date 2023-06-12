@@ -6,7 +6,7 @@ Subject: [PATCH] bump velocity native
 bumped minimum java ver to 11 too as a result
 
 diff --git a/pom.xml b/pom.xml
-index 603e22577aabb87e1b693f96602655fe808fd9fc..b803a1f1bf1497e8a49befce6db1eff187b62dc4 100644
+index 1f1a6829856d4c1dbc56ffcbc33620718be53a48..b1c93d8452a6c5b7a0c8a5c06294fb0e6925b4c6 100644
 --- a/pom.xml
 +++ b/pom.xml
 @@ -14,8 +14,8 @@
@@ -25,7 +25,7 @@ index 603e22577aabb87e1b693f96602655fe808fd9fc..b803a1f1bf1497e8a49befce6db1eff1
              <groupId>com.velocitypowered</groupId>
              <artifactId>velocity-native</artifactId>
 -            <version>1.1.10-SNAPSHOT</version>
-+            <version>3.1.2-SNAPSHOT</version>
++            <version>3.2.0-SNAPSHOT</version>
              <scope>compile</scope>
              <!-- Lazinity - exclude -->
              <exclusions>

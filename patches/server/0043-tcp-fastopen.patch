@@ -5,10 +5,10 @@ Subject: [PATCH] tcp fastopen
 
 
 diff --git a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java b/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
-index a4ab3ef6e89033fc47f3d2339b0827207fe05b22..8a8c9ebdb82f418ea1c868fe31bf4ffe87b0bf3b 100644
+index 172711addfb0aa0a402c58b49b025ca07917062d..bc4a5ef130720b596ef79f1782454d2dbc43f08f 100644
 --- a/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
 +++ b/src/main/java/me/kurumifake/lazinity/LazinityConfig.java
-@@ -149,4 +149,9 @@ public final class LazinityConfig {
+@@ -144,4 +144,9 @@ public final class LazinityConfig {
      private static void fireBlockPhysicsEvent() {
          fireBlockPhysicsEvent = getBoolean("fire-block-physics-event", true);
      }

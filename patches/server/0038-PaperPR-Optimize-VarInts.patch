@@ -6,7 +6,7 @@ Subject: [PATCH] (PaperPR) Optimize VarInts
 https://github.com/PaperMC/Paper/pull/6957
 
 diff --git a/src/main/java/net/minecraft/network/PacketDataSerializer.java b/src/main/java/net/minecraft/network/PacketDataSerializer.java
-index 4e2c3080b9a2296c5d3c7185496b094f2c483be7..97ba6272a981270155217082af75c61eb317ad8d 100644
+index 579eb1260c7266cd41025cff177de4fb00ac0cec..24e2000821bf7599c75acd473040bd282667a8db 100644
 --- a/src/main/java/net/minecraft/network/PacketDataSerializer.java
 +++ b/src/main/java/net/minecraft/network/PacketDataSerializer.java
 @@ -47,6 +47,15 @@ public class PacketDataSerializer extends ByteBuf {
