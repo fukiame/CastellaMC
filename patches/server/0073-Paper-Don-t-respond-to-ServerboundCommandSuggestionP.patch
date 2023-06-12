@@ -1,0 +1,23 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: stonar96 <minecraft.stonar96@gmail.com>
+Date: Sun, 12 Sep 2021 00:14:21 +0200
+Subject: [PATCH] (Paper) Don't respond to ServerboundCommandSuggestionPacket
+ when tab-complete is disabled
+
+
+diff --git a/src/main/java/net/minecraft/server/network/PlayerConnection.java b/src/main/java/net/minecraft/server/network/PlayerConnection.java
+index e1b44fb0a306c4a4aacd06d9649270106efe43cb..0a72ba177d9a3eea13d16e96a0ca4ec2bdacbc56 100644
+--- a/src/main/java/net/minecraft/server/network/PlayerConnection.java
++++ b/src/main/java/net/minecraft/server/network/PlayerConnection.java
+@@ -815,6 +815,11 @@ public class PlayerConnection implements PacketListenerPlayIn {
+         }
+         // Paper end
+         // CraftBukkit end
++        // Paper start - Don't suggest if tab-complete is disabled
++        if (org.spigotmc.SpigotConfig.tabComplete < 0) {
++            return;
++        }
++        // Paper end
+         StringReader stringreader = new StringReader(packetplayintabcomplete.c());
+ 
+         if (stringreader.canRead() && stringreader.peek() == '/') {
