@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: HexedHero <6012891+HexedHero@users.noreply.github.com>
+Date: Tue, 18 Jan 2022 06:54:31 +0000
+Subject: [PATCH] (Paper) Fix Lure infinite loop
+
+
+diff --git a/src/main/java/net/minecraft/world/entity/projectile/EntityFishingHook.java b/src/main/java/net/minecraft/world/entity/projectile/EntityFishingHook.java
+index 45f0f004e97b20e5c6c5b1f205b088bf8aa86017..a02fe1ed0ed96b1bbbbd5066fd8a3bcb33a34ad2 100644
+--- a/src/main/java/net/minecraft/world/entity/projectile/EntityFishingHook.java
++++ b/src/main/java/net/minecraft/world/entity/projectile/EntityFishingHook.java
+@@ -394,7 +394,7 @@ public class EntityFishingHook extends IProjectile {
+             } else {
+                 // CraftBukkit start - logic to modify fishing wait time
+                 this.waitTime = MathHelper.nextInt(this.random, this.minWaitTime, this.maxWaitTime);
+-                this.waitTime -= (this.applyLure) ? this.lureLevel * 20 * 5 : 0;
++                this.waitTime -= (this.applyLure) ? (this.lureLevel * 20 * 5 >= this.maxWaitTime ? this.waitTime - 1 : this.lureLevel * 20 * 5) : 0; // Paper - Fix Lure infinite loop
+                 // CraftBukkit end
+             }
+         }

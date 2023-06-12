@@ -1,0 +1,20 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: lexikiq <noellekiq@gmail.com>
+Date: Sat, 17 Jul 2021 20:37:02 -0400
+Subject: [PATCH] (Paper) Check player world in endPortalSoundRadius
+
+Fixes Spigot's endPortalSoundRadius not checking player worlds
+
+diff --git a/src/main/java/net/minecraft/world/item/ItemEnderEye.java b/src/main/java/net/minecraft/world/item/ItemEnderEye.java
+index feedbd8c97c1b1c56eaff359e6a940696d416906..3b01d6b5b2b28a7102eee5d80216b434d4c46b14 100644
+--- a/src/main/java/net/minecraft/world/item/ItemEnderEye.java
++++ b/src/main/java/net/minecraft/world/item/ItemEnderEye.java
+@@ -67,7 +67,7 @@ public class ItemEnderEye extends Item {
+                         double deltaX = soundPos.getX() - player.locX();
+                         double deltaZ = soundPos.getZ() - player.locZ();
+                         double distanceSquared = deltaX * deltaX + deltaZ * deltaZ;
+-                        if (world.spigotConfig.endPortalSoundRadius > 0 && distanceSquared > world.spigotConfig.endPortalSoundRadius * world.spigotConfig.endPortalSoundRadius) continue; // Spigot
++                        if (world.spigotConfig.endPortalSoundRadius > 0 && (distanceSquared > world.spigotConfig.endPortalSoundRadius * world.spigotConfig.endPortalSoundRadius || player.getWorld() != world)) continue; // Spigot // Paper - ensure recipient is in same world as portal
+                         if (distanceSquared > viewDistance * viewDistance) {
+                             double deltaLength = Math.sqrt(distanceSquared);
+                             double relativeX = player.locX() + (deltaX / deltaLength) * viewDistance;

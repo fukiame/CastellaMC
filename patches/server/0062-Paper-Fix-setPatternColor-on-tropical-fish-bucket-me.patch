@@ -1,0 +1,25 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Bjarne Koll <lynxplay101@gmail.com>
+Date: Sat, 6 Nov 2021 23:15:20 +0100
+Subject: [PATCH] (Paper) Fix setPatternColor on tropical fish bucket meta
+
+Prior to this commit, the tropical fish bucket meta would set the body
+color to the previous metas pattern colour when updating the pattern
+colour.
+
+This commit hence simply fixes this by using the proper body colour
+value when updating the pattern color.
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaTropicalFishBucket.java b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaTropicalFishBucket.java
+index 7b7e4907cd197e16ea5851b91d9b975658d2dbf3..88d63b693927c3ed22a5ee2d21f6d2fa94979324 100644
+--- a/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaTropicalFishBucket.java
++++ b/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaTropicalFishBucket.java
+@@ -113,7 +113,7 @@ class CraftMetaTropicalFishBucket extends CraftMetaItem implements TropicalFishB
+         if (variant == null) {
+             variant = 0;
+         }
+-        variant = CraftTropicalFish.getData(color, getPatternColor(), getPattern());
++        variant = CraftTropicalFish.getData(color, getBodyColor(), getPattern()); // Paper - properly set tropical fish pattern color without mutating body color
+     }
+ 
+     @Override

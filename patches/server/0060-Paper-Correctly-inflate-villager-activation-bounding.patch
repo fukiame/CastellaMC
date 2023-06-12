@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Bjarne Koll <32834385+lynxplay@users.noreply.github.com>
+Date: Wed, 20 Oct 2021 05:14:30 +0200
+Subject: [PATCH] (Paper) Correctly inflate villager activation bounding box
+
+
+diff --git a/src/main/java/org/spigotmc/ActivationRange.java b/src/main/java/org/spigotmc/ActivationRange.java
+index e7ca5c4e31b0dffc207b87bb9dbf4adefa1fb3df..52c2f0bd15e4f30d11078c3ad54f9b7376faca1b 100644
+--- a/src/main/java/org/spigotmc/ActivationRange.java
++++ b/src/main/java/org/spigotmc/ActivationRange.java
+@@ -215,7 +215,7 @@ public class ActivationRange
+             // Paper start
+             ActivationType.WATER.boundingBox = player.getBoundingBox().grow( waterActivationRange, 256, waterActivationRange );
+             ActivationType.FLYING_MONSTER.boundingBox = player.getBoundingBox().grow( flyingActivationRange, 256, flyingActivationRange );
+-            ActivationType.VILLAGER.boundingBox = player.getBoundingBox().grow( villagerActivationRange, 256, waterActivationRange );
++            ActivationType.VILLAGER.boundingBox = player.getBoundingBox().grow( villagerActivationRange, 256, villagerActivationRange );
+             // Paper end
+ 
+             int i = MathHelper.floor( maxBB.minX / 16.0D );

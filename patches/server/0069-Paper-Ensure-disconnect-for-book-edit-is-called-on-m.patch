@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Shane Freeder <theboyetronic@gmail.com>
+Date: Tue, 22 Jun 2021 19:58:53 +0100
+Subject: [PATCH] (Paper) Ensure disconnect for book edit is called on main
+
+
+diff --git a/src/main/java/net/minecraft/server/network/PlayerConnection.java b/src/main/java/net/minecraft/server/network/PlayerConnection.java
+index 5242415858656df58c6350bf44cd8fd20ca4f5bf..e1b44fb0a306c4a4aacd06d9649270106efe43cb 100644
+--- a/src/main/java/net/minecraft/server/network/PlayerConnection.java
++++ b/src/main/java/net/minecraft/server/network/PlayerConnection.java
+@@ -1155,7 +1155,7 @@ public class PlayerConnection implements PacketListenerPlayIn {
+         // CraftBukkit start
+         if (!me.kurumifake.lazinity.LazinityConfig.enableBookDeserialization) return; // KigPaper
+         if (this.lastBookTick + 20 > MinecraftServer.currentTick) {
+-            this.disconnect("Book edited too quickly!", org.bukkit.event.player.PlayerKickEvent.Cause.ILLEGAL_ACTION); // Paper - kick event cause
++            minecraftServer.scheduleOnMain(() -> this.disconnect("Book edited too quickly!", org.bukkit.event.player.PlayerKickEvent.Cause.ILLEGAL_ACTION)); // Paper - kick event cause // Paper - Also ensure this is called on main
+             return;
+         }
+         this.lastBookTick = MinecraftServer.currentTick;

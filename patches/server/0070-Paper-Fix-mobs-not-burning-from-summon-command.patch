@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Jake Potrebic <15055071+Machine-Maker@users.noreply.github.com>
+Date: Wed, 23 Jun 2021 01:07:59 -0700
+Subject: [PATCH] (Paper) Fix mobs not burning from summon command
+
+
+diff --git a/src/main/java/net/minecraft/world/entity/monster/EntityPhantom.java b/src/main/java/net/minecraft/world/entity/monster/EntityPhantom.java
+index 16c0c960aa1e4d35093b810c7648b5638175e106..772a54328fca040a85e2cdae84359de6489e5a8d 100644
+--- a/src/main/java/net/minecraft/world/entity/monster/EntityPhantom.java
++++ b/src/main/java/net/minecraft/world/entity/monster/EntityPhantom.java
+@@ -165,7 +165,9 @@ public class EntityPhantom extends EntityFlying implements IMonster {
+         if (nbttagcompound.hasUUID("Paper.SpawningEntity")) {
+             this.spawningEntity = nbttagcompound.getUUID("Paper.SpawningEntity");
+         }
+-        this.shouldBurnInDay = nbttagcompound.getBoolean("Paper.ShouldBurnInDay");
++        if (nbttagcompound.hasKeyOfType("Paper.ShouldBurnInDay", 99)) {
++            this.shouldBurnInDay = nbttagcompound.getBoolean("Paper.ShouldBurnInDay");
++        }
+         // Paper end
+     }
+ 
+diff --git a/src/main/java/net/minecraft/world/entity/monster/EntitySkeletonAbstract.java b/src/main/java/net/minecraft/world/entity/monster/EntitySkeletonAbstract.java
+index f8358e40c42f219232bf928f4e0073339a5e19d5..269f6eccdadc367e1a9d67678f7f687029fc6032 100644
+--- a/src/main/java/net/minecraft/world/entity/monster/EntitySkeletonAbstract.java
++++ b/src/main/java/net/minecraft/world/entity/monster/EntitySkeletonAbstract.java
+@@ -230,7 +230,9 @@ public abstract class EntitySkeletonAbstract extends EntityMonster implements IR
+     public void loadData(NBTTagCompound nbttagcompound) {
+         super.loadData(nbttagcompound);
+         this.eL();
+-        this.shouldBurnInDay = nbttagcompound.getBoolean("Paper.ShouldBurnInDay"); // Paper
++        if (nbttagcompound.hasKeyOfType("Paper.ShouldBurnInDay", 99)) {
++            this.shouldBurnInDay = nbttagcompound.getBoolean("Paper.ShouldBurnInDay"); // Paper
++        }
+     }
+ 
+     // Paper start

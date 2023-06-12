@@ -1,0 +1,28 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Jake Potrebic <jake.m.potrebic@gmail.com>
+Date: Sat, 21 Aug 2021 21:54:16 -0700
+Subject: [PATCH] (Paper) Fix bees aging inside hives
+
+Fixes bees incorrectly being aged up due to upstream's
+resetting the ticks inside hive on a failed release
+
+diff --git a/src/main/java/net/minecraft/world/level/block/entity/TileEntityBeehive.java b/src/main/java/net/minecraft/world/level/block/entity/TileEntityBeehive.java
+index 80083a6666a28372946cf0e68ded44d075357f7d..53f32867b2b1e78f4f00b921a22318636cb5e255 100644
+--- a/src/main/java/net/minecraft/world/level/block/entity/TileEntityBeehive.java
++++ b/src/main/java/net/minecraft/world/level/block/entity/TileEntityBeehive.java
+@@ -269,6 +269,7 @@ public class TileEntityBeehive extends TileEntity implements ITickable {
+     }
+ 
+     private void a(int i, EntityBee entitybee) {
++        if (!entitybee.ageLocked) { // Paper - respect age lock
+         int j = entitybee.getAge();
+ 
+         if (j < 0) {
+@@ -276,6 +277,7 @@ public class TileEntityBeehive extends TileEntity implements ITickable {
+         } else if (j > 0) {
+             entitybee.setAgeRaw(Math.max(0, j - i));
+         }
++        } // Paper - respect age lock
+ 
+         entitybee.setLoveTicks(Math.max(0, entitybee.eQ() - i));
+         entitybee.eO();

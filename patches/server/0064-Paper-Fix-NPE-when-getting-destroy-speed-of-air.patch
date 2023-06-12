@@ -1,0 +1,20 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: SoSeDiK <mrsosedik@gmail.com>
+Date: Thu, 2 Dec 2021 03:48:15 +0200
+Subject: [PATCH] (Paper) Fix NPE when getting destroy speed of air
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
+index 0006b3cad5fe46e50b0efeae99102f9d80276d61..58ed3345a961ad0cc184ebeb13d32cfa40ff42fc 100644
+--- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
++++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlock.java
+@@ -794,6 +794,9 @@ public class CraftBlock implements Block {
+         net.minecraft.world.item.ItemStack nmsItemStack;
+         if (itemStack instanceof CraftItemStack) {
+             nmsItemStack = ((CraftItemStack) itemStack).getHandle();
++            if (nmsItemStack == null) {
++                nmsItemStack = net.minecraft.world.item.ItemStack.NULL_ITEM;
++            }
+         } else {
+             nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
+         }

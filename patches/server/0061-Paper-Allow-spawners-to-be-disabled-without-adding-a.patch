@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: HexedHero <6012891+HexedHero@users.noreply.github.com>
+Date: Sun, 31 Oct 2021 07:51:57 +0000
+Subject: [PATCH] (Paper) Allow spawners to be disabled without adding a stupid
+ high tick rate
+
+
+diff --git a/src/main/java/net/minecraft/world/level/MobSpawnerAbstract.java b/src/main/java/net/minecraft/world/level/MobSpawnerAbstract.java
+index 33a5dbcc11455f81088d9fd685a8c4b1b8f4b1f2..baad783167248fda78aa33e6a9d8b830da882fa4 100644
+--- a/src/main/java/net/minecraft/world/level/MobSpawnerAbstract.java
++++ b/src/main/java/net/minecraft/world/level/MobSpawnerAbstract.java
+@@ -76,6 +76,7 @@ public abstract class MobSpawnerAbstract {
+         // Paper start - Configurable mob spawner tick rate
+         if (spawnDelay > 0 && --tickDelay > 0) return;
+         tickDelay = this.a().paperConfig.mobSpawnerTickRate;
++        if (tickDelay == -1) { return; } // If disabled
+         // Paper end
+         if (!this.h()) {
+             this.f = this.e;

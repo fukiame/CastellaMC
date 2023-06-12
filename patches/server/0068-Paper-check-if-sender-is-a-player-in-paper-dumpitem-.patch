@@ -1,0 +1,21 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: MiniDigger <admin@minidigger.me>
+Date: Thu, 17 Jun 2021 20:13:55 +0200
+Subject: [PATCH] (Paper) check if sender is a player in paper dumpitem command
+
+
+diff --git a/src/main/java/com/destroystokyo/paper/PaperCommand.java b/src/main/java/com/destroystokyo/paper/PaperCommand.java
+index ec2b9995f1bf0f6cf029df7bfac526c2672acf3a..5357721b839f5f93a583c49dd811ec94698cf710 100644
+--- a/src/main/java/com/destroystokyo/paper/PaperCommand.java
++++ b/src/main/java/com/destroystokyo/paper/PaperCommand.java
+@@ -207,6 +207,10 @@ public class PaperCommand extends Command {
+     }
+ 
+     private void doDumpItem(CommandSender sender) {
++        if (!(sender instanceof Player)) {
++            sender.sendMessage("Only players can use this command");
++            return;
++        }
+         ItemStack itemInHand = ((CraftPlayer) sender).getItemInHand();
+         net.minecraft.world.item.ItemStack itemStack = CraftItemStack.asNMSCopy(itemInHand);
+         NBTTagCompound tag = itemStack.getTag();
